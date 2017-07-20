@@ -1,4 +1,4 @@
-const { asyncify } = require('./asyncify')
+const { async } = require('./async')
 const { call } = require('./call')
 const { echo } = require('./echo')
 const { either } = require('./either')
@@ -11,7 +11,7 @@ const { now } = require('./now')
 const { randomNumber } = require('./random-number')
 
 module.exports = {
-  asyncify,
+  async,
   call,
   echo,
   either,
