@@ -1,27 +1,31 @@
+const { asyncify } = require('./asyncify')
 const { call } = require('./call')
-const { randomNumber } = require('./random-number')
-const { now } = require('./now')
-const { guid } = require('./guid')
 const { echo } = require('./echo')
-const { jsonParse } = require('./json-parse')
+const { either } = require('./either')
 const { getState, setState } = require('./state')
-const { logInfo, logError } = require('./log')
+const { guid } = require('./guid')
 const { httpGet, httpPost, httpPut, httpDelete, rpc } = require('./http')
+const { jsonParse } = require('./json-parse')
+const { logInfo, logError } = require('./log')
+const { now } = require('./now')
+const { randomNumber } = require('./random-number')
 
 module.exports = {
+  asyncify,
   call,
-  randomNumber,
-  now,
-  guid,
   echo,
+  either,
   getState,
-  setState,
-  logInfo,
-  logError,
-  jsonParse,
+  guid,
+  httpDelete,
   httpGet,
   httpPost,
   httpPut,
-  httpDelete,
+  jsonParse,
+  logError,
+  logInfo,
+  now,
+  randomNumber,
   rpc,
+  setState
 }
