@@ -5,6 +5,6 @@ function logFn(l, { payload }) {
 module.exports = {
   logInfoFn: logFn,
   logErrorFn: logFn,
-  logInfo: action => logFn(console.info, action),
-  logError: action => logFn(console.error, action),
+  logInfo: cmd => logFn(console.info, cmd),
+  logError: cmd => logFn(console.error, cmd),
 }

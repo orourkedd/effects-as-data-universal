@@ -1,13 +1,13 @@
 const { jsonParse } = require('./json-parse')
-const actions = require('../../actions/universal')
+const cmds = require('../cmds')
 const { deepEqual } = require('assert')
 
 describe('json-parse.js', () => {
   describe('jsonParse()', () => {
     it('should parsed json', () => {
-      const action = actions.jsonParse('{"id":123}')
+      const cmd = cmds.jsonParse('{"id":123}')
       const expected = { id: 123 }
-      const actual = jsonParse(action)
+      const actual = jsonParse(cmd)
       deepEqual(actual, expected)
     })
   })

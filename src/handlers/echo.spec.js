@@ -1,13 +1,13 @@
 const { echo } = require('./echo')
-const actions = require('../../actions/universal')
+const cmds = require('../cmds')
 const { deepEqual } = require('assert')
 
 describe('echo.js', () => {
   describe('echo()', () => {
-    it('should return action.payload', () => {
-      const action = actions.echo(123)
+    it('should return cmd.payload', () => {
+      const cmd = cmds.echo(123)
       const expected = 123
-      const actual = echo(action)
+      const actual = echo(cmd)
       deepEqual(actual, expected)
     })
   })

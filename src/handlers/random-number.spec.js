@@ -1,13 +1,13 @@
-const actions = require('../../actions/universal/random-number')
+const cmds = require('../cmds/random-number')
 const { randomNumberFn } = require('./random-number')
 const { deepEqual } = require('assert')
 
 describe('random-number.js', () => {
   describe('#randomNumber', () => {
     it('should return a randomNumber', () => {
-      const action = actions.randomNumber()
+      const cmd = cmds.randomNumber()
       const mathRandom = () => 0.123
-      const actual = randomNumberFn(mathRandom, action)
+      const actual = randomNumberFn(mathRandom, cmd)
       const expected = 0.123
       deepEqual(actual, expected)
     })

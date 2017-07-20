@@ -5,30 +5,30 @@ const defaultHeaders = {
 }
 
 /**
- * Creates a `httpGet` action.  `yield` an `httpGet` action to do an http GET request.
+ * Creates a `httpGet` cmd.  `yield` an `httpGet` cmd to do an http GET request.
  * @param {string} url the url to GET.
  * @param {Object} [headers={}] request headers.
  * @param {Object} [options={}] options for `fetch`.
- * @returns {Object} an action of type `httpGet`.
+ * @returns {Object} an cmd of type `httpGet`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should return a result from GET', testExample(() => {
  *     return [
- *       [{ url: 'http://www.example.com' }, actions.httpGet('http://www.example.com')],
+ *       [{ url: 'http://www.example.com' }, cmds.httpGet('http://www.example.com')],
  *       [{ foo: 'bar' }, success({ foo: 'bar' })]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * example ({ url }) {
- *   const result = yield actions.httpGet(url)
+ *   const result = yield cmds.httpGet(url)
  *   return result
  * }
  *
@@ -50,32 +50,32 @@ function httpGet(url, headers = {}, options = {}) {
 }
 
 /**
- * Creates a `httpPost` action.  `yield` an `httpPost` action to do an http POST request.
+ * Creates a `httpPost` cmd.  `yield` an `httpPost` cmd to do an http POST request.
  * @param {string} url the url to POST.
  * @param {Object} [payload] the payload to POST.
  * @param {Object} [headers={}] request headers.
  * @param {Object} [options={}] options for `fetch`.
- * @returns {Object} an action of type `httpPost`.
+ * @returns {Object} an cmd of type `httpPost`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should POST payload to url', testExample(() => {
  *     const url = 'http://www.example.com/api/v1/user'
  *     return [
- *       [{ url }, actions.httpPost(url, { foo: 'bar' })],
+ *       [{ url }, cmds.httpPost(url, { foo: 'bar' })],
  *       [success(), success()]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * example (payload) {
- *   const result = yield actions.httpPost('http://www.example.com/api/v1/user', payload)
+ *   const result = yield cmds.httpPost('http://www.example.com/api/v1/user', payload)
  *   return result
  * }
  *
@@ -97,32 +97,32 @@ function httpPost(url, payload, headers = {}, options = {}) {
 }
 
 /**
- * Creates a `httpPut` action.  `yield` an `httpPut` action to do an http PUT request.
+ * Creates a `httpPut` cmd.  `yield` an `httpPut` cmd to do an http PUT request.
  * @param {string} url the url to PUT.
  * @param {Object} [payload] the payload to PUT.
  * @param {Object} [headers={}] request headers.
  * @param {Object} [options={}] options for `fetch`.
- * @returns {Object} an action of type `httpPut`.
+ * @returns {Object} an cmd of type `httpPut`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should PUT payload to url', testExample(() => {
  *     const url = 'http://www.example.com/api/v1/user'
  *     return [
- *       [{ url }, actions.httpPut(url, { foo: 'bar' })],
+ *       [{ url }, cmds.httpPut(url, { foo: 'bar' })],
  *       [success(), success()]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * example (payload) {
- *   const result = yield actions.httpPut('http://www.example.com/api/v1/user', payload)
+ *   const result = yield cmds.httpPut('http://www.example.com/api/v1/user', payload)
  *   return result
  * }
  *
@@ -144,30 +144,30 @@ function httpPut(url, payload, headers = {}, options = {}) {
 }
 
 /**
- * Creates a `httpDelete` action.  `yield` an `httpDelete` action to do an http DELETE request.
+ * Creates a `httpDelete` cmd.  `yield` an `httpDelete` cmd to do an http DELETE request.
  * @param {string} url the url to DELETE.
  * @param {Object} [headers={}] request headers.
  * @param {Object} [options={}] options for `fetch`.
- * @returns {Object} an action of type `httpDelete`.
+ * @returns {Object} an cmd of type `httpDelete`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should return a result from DELETE', testExample(() => {
  *     return [
- *       [{ id: '32' }, actions.httpDelete('http://www.example.com/api/v1/user/32')],
+ *       [{ id: '32' }, cmds.httpDelete('http://www.example.com/api/v1/user/32')],
  *       [success(), success())]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * example ({ id }) {
- *   const result = yield actions.httpDelete(`http://www.example.com/api/v1/user/${id}`)
+ *   const result = yield cmds.httpDelete(`http://www.example.com/api/v1/user/${id}`)
  *   return result
  * }
  *

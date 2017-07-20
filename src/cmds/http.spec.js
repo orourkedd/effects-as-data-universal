@@ -5,7 +5,7 @@ const defaultHeaders = {
   'Content-Type': 'application/json;charset=UTF-8',
 }
 
-describe('actions', () => {
+describe('cmds', () => {
   describe('httpGet', () => {
     it('should return an httpGet object', () => {
       const actual = httpGet('http://www.example.com')

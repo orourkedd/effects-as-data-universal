@@ -6,5 +6,5 @@ function guidFn(v4) {
 
 module.exports = {
   guidFn,
-  guid: action => guidFn(uuid.v4, action),
+  guid: cmd => guidFn(uuid.v4, cmd),
 }

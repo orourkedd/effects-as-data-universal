@@ -6,7 +6,7 @@ describe('handlers', () => {
   describe('httpGetFn', () => {
     it('should make a get request', () => {
       const get = stub().returns(Promise.resolve({ foo: 'bar' }))
-      const action = {
+      const cmd = {
         type: 'httpGet',
         url: 'http://www.example.com',
         headers: {
@@ -17,7 +17,7 @@ describe('handlers', () => {
         },
       }
 
-      return httpGetFn(get, action).then(result => {
+      return httpGetFn(get, cmd).then(result => {
         const options = {
           credentials: 'test',
           headers: {
@@ -34,7 +34,7 @@ describe('handlers', () => {
   describe('httpDeleteFn', () => {
     it('should make a delete request', () => {
       const remove = stub().returns(Promise.resolve({ foo: 'bar' }))
-      const action = {
+      const cmd = {
         type: 'httpDelete',
         url: 'http://www.example.com',
         headers: {
@@ -45,7 +45,7 @@ describe('handlers', () => {
         },
       }
 
-      return httpDeleteFn(remove, action).then(result => {
+      return httpDeleteFn(remove, cmd).then(result => {
         const options = {
           credentials: 'test',
           headers: {
@@ -62,7 +62,7 @@ describe('handlers', () => {
   describe('httpPostFn', () => {
     it('should make a post request', () => {
       const post = stub().returns(Promise.resolve({ foo: 'bar' }))
-      const action = {
+      const cmd = {
         type: 'httpPost',
         url: 'http://www.example.com',
         headers: {
@@ -76,7 +76,7 @@ describe('handlers', () => {
         },
       }
 
-      return httpPostFn(post, action).then(result => {
+      return httpPostFn(post, cmd).then(result => {
         const options = {
           credentials: 'test',
           headers: {
@@ -94,7 +94,7 @@ describe('handlers', () => {
   describe('httpPutFn', () => {
     it('should make a put request', () => {
       const put = stub().returns(Promise.resolve({ foo: 'bar' }))
-      const action = {
+      const cmd = {
         type: 'httpPut',
         url: 'http://www.example.com',
         headers: {
@@ -108,7 +108,7 @@ describe('handlers', () => {
         },
       }
 
-      return httpPutFn(put, action).then(result => {
+      return httpPutFn(put, cmd).then(result => {
         const options = {
           credentials: 'test',
           headers: {

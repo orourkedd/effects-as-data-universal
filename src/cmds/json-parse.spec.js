@@ -3,7 +3,7 @@ const { deepEqual } = require('assert')
 
 describe('json-parse.js', () => {
   describe('jsonParse()', () => {
-    it('should return an jsonParse action with a payload field', () => {
+    it('should return an jsonParse cmd with a payload field', () => {
       const expected = {
         type: 'jsonParse',
         payload: '{"id":123}',

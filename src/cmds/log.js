@@ -1,27 +1,27 @@
 /**
- * Creates a `logInfo` action.  `yield` a `logInfo` action to log to the console using `console.info`.
+ * Creates a `logInfo` cmd.  `yield` a `logInfo` cmd to log to the console using `console.info`.
  * @param {string} [payload] the payload to log.
- * @returns {Object} an action of type `logInfo`.
+ * @returns {Object} an cmd of type `logInfo`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should log a message', testExample(() => {
  *     return [
- *       [{ message: 'foo' }, actions.logInfo('foo')],
+ *       [{ message: 'foo' }, cmds.logInfo('foo')],
  *       [null, success()]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * example ({ message }) {
- *   const result = yield actions.logInfo(message)
+ *   const result = yield cmds.logInfo(message)
  *   return result
  * }
  *
@@ -40,29 +40,29 @@ function logInfo(payload) {
 }
 
 /**
- * Creates a `logError` action.  `yield` a `logError` action to log to the console using `console.error`.
+ * Creates a `logError` cmd.  `yield` a `logError` cmd to log to the console using `console.error`.
  * @param {string} [payload] the payload to log.
- * @returns {Object} an action of type `logError`.
+ * @returns {Object} an cmd of type `logError`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should log a message', testExample(() => {
  *     return [
- *       [{ message: 'foo' }, actions.logError('foo')],
+ *       [{ message: 'foo' }, cmds.logError('foo')],
  *       [null, success()]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * example ({ message }) {
- *   const result = yield actions.logError(message)
+ *   const result = yield cmds.logError(message)
  *   return result
  * }
  *

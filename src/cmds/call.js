@@ -1,34 +1,34 @@
 /**
- * Creates a `call` action.  `yield` a `call` action to call another effects-as-data function.  `call` is used to compose effects-as-data functions in a testible manner.
+ * Creates a `call` cmd.  `yield` a `call` cmd to call another effects-as-data function.  `call` is used to compose effects-as-data functions in a testible manner.
  * @param {Function} fn an effects-as-data generator function.
  * @param {any} [payload] the payload for the effects-as-data function.
  * @param {Object} [options={}] options for `call`
- * @returns {Object} an action of type `call`.
+ * @returns {Object} an cmd of type `call`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should call an effects-as-data function', testExample(() => {
  *     return [
- *       ['123', actions.call(getUser, { id: '123' })],
+ *       ['123', cmds.call(getUser, { id: '123' })],
  *       [{ id: '123', username: 'foo' }, success({ id: '123', username: 'foo' })]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * getUser ({ id }) {
- *  const user = yield actions.httpGet(`https://example.com/api/v1/users/${id}`)
+ *  const user = yield cmds.httpGet(`https://example.com/api/v1/users/${id}`)
  *  return user
  * }
  *
  * function * example ({ id }) {
- *   const result = yield actions.call(getUser, { id })
+ *   const result = yield cmds.call(getUser, { id })
  *   return result
  * }
  *
@@ -45,10 +45,10 @@ function call(fn, payload, options = {}) {
     type: 'call',
     fn,
     payload,
-    asyncAction: options.asyncAction === true,
+    asyncAction: options.asyncAction === true
   }
 }
 
 module.exports = {
-  call,
+  call
 }

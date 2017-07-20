@@ -3,7 +3,7 @@ const { deepEqual } = require('assert')
 
 describe('call.js', () => {
   describe('#call', () => {
-    it('should return a call action', () => {
+    it('should return a call cmd', () => {
       const fn = function*() {}
       const a = call(fn, 'payload')
       deepEqual(a, {

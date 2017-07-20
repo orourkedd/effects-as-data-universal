@@ -1,25 +1,25 @@
 /**
- * Create an `now` action.  `yield` a `now` action to get the current timestamp from `Date.now()`.
- * @returns {Object} an action of type `now`.
+ * Create an `now` cmd.  `yield` a `now` cmd to get the current timestamp from `Date.now()`.
+ * @returns {Object} an cmd of type `now`.
  * @example //  Test It
  * const { testIt } = require('effects-as-data/test')
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  * const testExample = testIt(example)
  *
  * describe('example()', () => {
  *   it('should return the current timestamp', testExample(() => {
  *     return [
- *       [null, actions.now()],
+ *       [null, cmds.now()],
  *       [123456, success(123456)]
  *     ]
  *   }))
  * })
  *
  * @example //  Write It
- * const { actions } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
+ * const { cmds } = require('effects-as-data/universal') //  also available in require('effects-as-data/node')
  *
  * function * example () {
- *   const timestamp = yield actions.now()
+ *   const timestamp = yield cmds.now()
  *   return timestamp
  * }
  *

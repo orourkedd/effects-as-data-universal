@@ -3,7 +3,7 @@ const { deepEqual } = require('assert')
 
 describe('state.js', () => {
   describe('getState()', () => {
-    it('should return a getState action with a key field', () => {
+    it('should return a getState cmd with a key field', () => {
       const expected = {
         type: 'getState',
         keys: ['foo'],
@@ -16,7 +16,7 @@ describe('state.js', () => {
   })
 
   describe('setState()', () => {
-    it('should return a setState action with a key and payload field', () => {
+    it('should return a setState cmd with a key and payload field', () => {
       const expected = {
         type: 'setState',
         payload: { foo: 'bar' },

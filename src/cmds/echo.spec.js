@@ -3,7 +3,7 @@ const { deepEqual } = require('assert')
 
 describe('echo.js', () => {
   describe('echo()', () => {
-    it('should return an echo action with a payload field', () => {
+    it('should return an echo cmd with a payload field', () => {
       const expected = {
         type: 'echo',
         payload: '123',

@@ -1,11 +1,11 @@
 const { getState, setState, getGlobalState } = require('./state')
-const actions = require('../../actions/universal')
+const cmds = require('../cmds')
 const { deepEqual } = require('assert')
 
 describe('state.js', () => {
   describe('getState()', () => {
     it('should return values from state represented by keys', () => {
-      const action = actions.getState(['foo', 'bar'])
+      const cmd = cmds.getState(['foo', 'bar'])
       global.effectsAsDataState = {
         foo: 1,
         bar: 2,
@@ -14,7 +14,7 @@ describe('state.js', () => {
         foo: 1,
         bar: 2,
       }
-      const actual = getState(action)
+      const actual = getState(cmd)
       deepEqual(actual, expected)
     })
   })
@@ -23,8 +23,8 @@ describe('state.js', () => {
     it('should return values from state represented by keys', () => {
       const foo = Date.now()
       const bar = Date.now()
-      const action = actions.setState({ foo, bar })
-      setState(action)
+      const cmd = cmds.setState({ foo, bar })
+      setState(cmd)
       const expected = { foo, bar }
       const actual = getGlobalState()
       deepEqual(actual, expected)
