@@ -1,0 +1,35 @@
+{
+  "name": "effects-as-data-universal",
+  "version": "2.0.0",
+  "description": "Universal commands for effects-as-data",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orourkedd/effects-as-data-universal"
+  },
+  "scripts": {
+    "test": "jest",
+    "test-mocha": "mocha src/**/*.spec.js --recursive --compilers js:babel-register --require babel-polyfill",
+    "transpile": "babel src --out-dir lib --source-maps",
+    "deploy": "npm run transpile && npm test && npm publish --tag beta"
+  },
+  "author": "orourkedd",
+  "license": "MIT",
+  "dependencies": {
+    "ramda": "^0.24.1",
+    "simple-protocol-http": "^0.15.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-jest": "^20.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "jest-cli": "^20.0.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/test.js",
+      "<rootDir>/src/test.js",
+      "<rootDir>/lib/test.js"
+    ]
+  }
+}
