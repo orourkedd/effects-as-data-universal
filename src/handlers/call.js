@@ -1,6 +1,4 @@
-const { call } = require('effects-as-data')
-
-function callHandler(cmd, config, handlers) {
+function callHandler(cmd, { call, config, handlers }) {
   return call(config, handlers, cmd.fn, cmd.payload)
 }
 
