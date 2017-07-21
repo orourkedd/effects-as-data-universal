@@ -1,6 +1,4 @@
-const { call } = require('effects-as-data')
-
-function either({ cmd, defaultValue }, config, handlers) {
+function either({ cmd, defaultValue }, { call, config, handlers }) {
   return call(config, handlers, function*() {
     try {
       const result = yield cmd
