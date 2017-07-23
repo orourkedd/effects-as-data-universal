@@ -9,19 +9,7 @@ describe('call.js', () => {
       deepEqual(a, {
         type: 'call',
         payload: 'payload',
-        fn,
-        asyncAction: false,
-      })
-    })
-
-    it('should set options', () => {
-      const fn = function*() {}
-      const a = call(fn, 'payload', { asyncAction: true })
-      deepEqual(a, {
-        type: 'call',
-        payload: 'payload',
-        fn,
-        asyncAction: true,
+        fn
       })
     })
   })

@@ -40,12 +40,11 @@
  *   user.payload.username === 'foo' //  true, if a user with an id of '123' has the `username` 'foo'.
  * })
  */
-function call(fn, payload, options = {}) {
+function call(fn, payload) {
   return {
     type: 'call',
     fn,
-    payload,
-    asyncAction: options.asyncAction === true
+    payload
   }
 }
 
