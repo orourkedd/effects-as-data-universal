@@ -9,6 +9,7 @@ const { jsonParse } = require('./json-parse')
 const { logInfo, logError } = require('./log')
 const { now } = require('./now')
 const { randomNumber } = require('./random-number')
+const { retry } = require('./retry')
 
 module.exports = {
   setImmediate,
@@ -26,5 +27,6 @@ module.exports = {
   logInfo,
   now,
   randomNumber,
-  setState
+  setState,
+  retry
 }
