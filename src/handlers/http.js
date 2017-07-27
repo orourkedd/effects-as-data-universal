@@ -1,28 +1,56 @@
 const { mergeAll, keys } = require('ramda')
 const fetch = require('fetch-everywhere')
 
+const defaultHeaders = {
+  'Content-Type': 'application/json;charset=UTF-8'
+}
+
 function httpGetFn(fetch, { url, headers, options }) {
-  return fetch(url, mergeAll([options, { headers, method: 'GET' }]))
-    .then(checkStatus)
-    .then(parse)
-}
-
-function httpPostFn(post, { url, payload, headers, options }) {
-  return fetch(url, mergeAll([options, { headers, method: 'POST' }]))
-    .then(checkStatus)
-    .then(parse)
-}
-
-function httpPutFn(put, { url, payload, headers, options }) {
-  return fetch(url, mergeAll([options, { headers, method: 'PUT' }]))
-    .then(checkStatus)
-    .then(parse)
+  const defaultOptions = {
+    method: 'GET',
+    credentials: 'include'
+  }
+  const allOptions = mergeAll([defaultOptions, options, { headers }])
+  return fetch(url, allOptions).then(checkStatus).then(parse)
 }
 
 function httpDeleteFn(remove, { url, headers, options }) {
-  return fetch(url, mergeAll([options, { headers, method: 'DELETE' }]))
-    .then(checkStatus)
-    .then(parse)
+  const defaultOptions = {
+    method: 'DELETE',
+    credentials: 'include'
+  }
+  const allOptions = mergeAll([defaultOptions, options, { headers }])
+  return fetch(url, allOptions).then(checkStatus).then(parse)
+}
+
+function httpPostFn(post, { url, payload, headers, options }) {
+  const defaultOptions = {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify(payload),
+    headers: defaultHeaders
+  }
+  const allOptions = mergeAll([
+    defaultOptions,
+    options,
+    { headers, body: JSON.stringify(payload) }
+  ])
+  return fetch(url, allOptions).then(checkStatus).then(parse)
+}
+
+function httpPutFn(put, { url, payload, headers, options }) {
+  const defaultOptions = {
+    method: 'PUT',
+    credentials: 'include',
+    body: JSON.stringify(payload),
+    headers: defaultHeaders
+  }
+  const allOptions = mergeAll([
+    defaultOptions,
+    options,
+    { headers, body: JSON.stringify(payload) }
+  ])
+  return fetch(url, allOptions).then(checkStatus).then(parse)
 }
 
 function checkStatus(response) {
