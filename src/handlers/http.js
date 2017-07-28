@@ -5,13 +5,13 @@ const defaultHeaders = {
   'Content-Type': 'application/json;charset=UTF-8'
 }
 
-function httpGetFn(fetch, { url, headers, options }) {
+function httpGetFn(get, { url, headers, options }) {
   const defaultOptions = {
     method: 'GET',
     credentials: 'include'
   }
   const allOptions = mergeAll([defaultOptions, options, { headers }])
-  return fetch(url, allOptions).then(checkStatus).then(parse)
+  return get(url, allOptions).then(checkStatus).then(parse)
 }
 
 function httpDeleteFn(remove, { url, headers, options }) {
@@ -20,7 +20,7 @@ function httpDeleteFn(remove, { url, headers, options }) {
     credentials: 'include'
   }
   const allOptions = mergeAll([defaultOptions, options, { headers }])
-  return fetch(url, allOptions).then(checkStatus).then(parse)
+  return remove(url, allOptions).then(checkStatus).then(parse)
 }
 
 function httpPostFn(post, { url, payload, headers, options }) {
@@ -35,7 +35,7 @@ function httpPostFn(post, { url, payload, headers, options }) {
     options,
     { headers, body: JSON.stringify(payload) }
   ])
-  return fetch(url, allOptions).then(checkStatus).then(parse)
+  return post(url, allOptions).then(checkStatus).then(parse)
 }
 
 function httpPutFn(put, { url, payload, headers, options }) {
@@ -50,7 +50,7 @@ function httpPutFn(put, { url, payload, headers, options }) {
     options,
     { headers, body: JSON.stringify(payload) }
   ])
-  return fetch(url, allOptions).then(checkStatus).then(parse)
+  return put(url, allOptions).then(checkStatus).then(parse)
 }
 
 function checkStatus(response) {
