@@ -3,9 +3,9 @@ const { deepEqual } = require('assert')
 const { stub } = require('sinon')
 
 describe('handlers', () => {
-  describe('httpGetFn', () => {
+  describe.only('httpGetFn', () => {
     it('should make a get request', () => {
-      const get = stub().returns(Promise.resolve({ foo: 'bar' }))
+      const get = stub().returns(Promise.resolve(new Response(JSON.stringify({ foo: 'bar' }))))
       const cmd = {
         type: 'httpGet',
         url: 'http://www.example.com',
@@ -18,15 +18,10 @@ describe('handlers', () => {
       }
 
       return httpGetFn(get, cmd).then(result => {
-        const options = {
-          credentials: 'test',
-          headers: {
-            test: 'header'
-          }
-        }
-        deepEqual(get.firstCall.args[0], options)
-        deepEqual(get.firstCall.args[1], 'http://www.example.com')
-        deepEqual(result, { foo: 'bar' })
+        deepEqual(get.firstCall.args[0], 'http://www.example.com')
+        deepEqual(get.firstCall.args[1].headers, cmd.headers)
+        deepEqual(get.firstCall.args[1].credentials, cmd.options.credentials)
+        deepEqual(result.payload, { foo: 'bar' })
       })
     })
   })
