@@ -2,7 +2,7 @@ const { httpGetFn, httpDeleteFn, httpPostFn, httpPutFn } = require('./http')
 const { deepEqual } = require('assert')
 const { stub } = require('sinon')
 
-describe.skip('handlers', () => {
+describe('handlers', () => {
   describe('httpGetFn', () => {
     it('should make a get request', () => {
       const get = stub().returns(Promise.resolve({ foo: 'bar' }))

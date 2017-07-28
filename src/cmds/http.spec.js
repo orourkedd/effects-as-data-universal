@@ -2,7 +2,7 @@ const { httpGet, httpDelete, httpPost, httpPut } = require('./http')
 const { deepEqual } = require('assert')
 
 const defaultHeaders = {
-  'Content-Type': 'application/json;charset=UTF-8',
+  'Content-Type': 'application/json;charset=UTF-8'
 }
 
 describe('cmds', () => {
@@ -13,7 +13,7 @@ describe('cmds', () => {
         type: 'httpGet',
         url: 'http://www.example.com',
         headers: {},
-        options: {},
+        options: {}
       }
       deepEqual(actual, expected)
     })
@@ -22,10 +22,10 @@ describe('cmds', () => {
       const actual = httpGet(
         'http://www.example.com',
         {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         {
-          credentials: 'include',
+          credentials: 'include'
         }
       )
 
@@ -33,11 +33,11 @@ describe('cmds', () => {
         type: 'httpGet',
         url: 'http://www.example.com',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         options: {
-          credentials: 'include',
-        },
+          credentials: 'include'
+        }
       }
 
       deepEqual(actual, expected)
@@ -51,7 +51,7 @@ describe('cmds', () => {
         type: 'httpDelete',
         url: 'http://www.example.com',
         headers: {},
-        options: {},
+        options: {}
       }
       deepEqual(actual, expected)
     })
@@ -60,10 +60,10 @@ describe('cmds', () => {
       const actual = httpDelete(
         'http://www.example.com',
         {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         {
-          credentials: 'include',
+          credentials: 'include'
         }
       )
 
@@ -71,11 +71,11 @@ describe('cmds', () => {
         type: 'httpDelete',
         url: 'http://www.example.com',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         options: {
-          credentials: 'include',
-        },
+          credentials: 'include'
+        }
       }
 
       deepEqual(actual, expected)
@@ -90,20 +90,20 @@ describe('cmds', () => {
         url: 'http://www.example.com',
         payload: { foo: 'bar' },
         headers: defaultHeaders,
-        options: {},
+        options: {}
       }
       deepEqual(actual, expected)
     })
 
-    it.only('should return an httpPost', () => {
+    it('should return an httpPost', () => {
       const actual = httpPost(
         'http://www.example.com',
         { foo: 'bar' },
         {
-          'Content-Type': 'text/html',
+          'Content-Type': 'text/html'
         },
         {
-          credentials: 'include',
+          credentials: 'include'
         }
       )
 
@@ -112,11 +112,11 @@ describe('cmds', () => {
         url: 'http://www.example.com',
         payload: { foo: 'bar' },
         headers: {
-          'Content-Type': 'text/html',
+          'Content-Type': 'text/html'
         },
         options: {
-          credentials: 'include',
-        },
+          credentials: 'include'
+        }
       }
 
       deepEqual(actual, expected)
@@ -131,7 +131,7 @@ describe('cmds', () => {
         url: 'http://www.example.com',
         payload: { foo: 'bar' },
         headers: defaultHeaders,
-        options: {},
+        options: {}
       }
       deepEqual(actual, expected)
     })
@@ -141,10 +141,10 @@ describe('cmds', () => {
         'http://www.example.com',
         { foo: 'bar' },
         {
-          'Content-Type': 'text/html',
+          'Content-Type': 'text/html'
         },
         {
-          credentials: 'include',
+          credentials: 'include'
         }
       )
 
@@ -153,11 +153,11 @@ describe('cmds', () => {
         url: 'http://www.example.com',
         payload: { foo: 'bar' },
         headers: {
-          'Content-Type': 'text/html',
+          'Content-Type': 'text/html'
         },
         options: {
-          credentials: 'include',
-        },
+          credentials: 'include'
+        }
       }
 
       deepEqual(actual, expected)
