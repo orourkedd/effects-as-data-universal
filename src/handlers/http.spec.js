@@ -1,5 +1,5 @@
 const { httpGetFn, httpDeleteFn, httpPostFn, httpPutFn } = require('./http')
-const { deepEqual } = require('assert')
+const { deepEqual, equal } = require('assert')
 const { stub } = require('sinon')
 
 const createResponsePromise = (payload, init) => Promise.resolve(new Response(JSON.stringify(payload), init))
@@ -46,7 +46,19 @@ describe('handlers', () => {
         }
       }
 
-      return httpGetFn(get, cmd).catch(e => console.log(e))
+      return httpGetFn(get, cmd).catch(e => {
+        const payload = {
+          meta: {
+            status: 500,
+            statusText: 'Internal Server Error',
+            headers: {}
+          },
+          payload: { foo: 'bar' }
+         }
+
+          equal(e instanceof Error, true)
+          deepEqual(e.payload, payload)
+      })
     })
   })
 
@@ -75,6 +87,34 @@ describe('handlers', () => {
         deepEqual(remove.firstCall.args[0], 'http://www.example.com')
         deepEqual(remove.firstCall.args[1], options)
         deepEqual(result.payload, { foo: 'bar' })
+      })
+    })
+
+    it('should make a delete request and throw on non 200 status codes', () => {
+      const remove = stub().returns(createResponsePromise({ foo: 'bar' }, { status: 500 }))
+      const cmd = {
+        type: 'httpDelete',
+        url: 'http://www.example.com',
+        headers: {
+          test: 'header'
+        },
+        options: {
+          credentials: 'test'
+        }
+      }
+
+      return httpDeleteFn(remove, cmd).catch(e => {
+        const payload = {
+          meta: {
+            status: 500,
+            statusText: 'Internal Server Error',
+            headers: {}
+          },
+          payload: { foo: 'bar' }
+         }
+
+          equal(e instanceof Error, true)
+          deepEqual(e.payload, payload)
       })
     })
   })
@@ -113,6 +153,37 @@ describe('handlers', () => {
         deepEqual(result.payload, { foo: 'bar' })
       })
     })
+
+    it('should make a post request and throw on non 200 status codes', () => {
+      const post = stub().returns(createResponsePromise({ foo: 'bar' }, { status: 500 }))
+      const cmd = {
+        type: 'httpPost',
+        url: 'http://www.example.com',
+        headers: {
+          test: 'header'
+        },
+        options: {
+          credentials: 'test'
+        },
+        payload: {
+          pay: 'load'
+        }
+      }
+
+      return httpPostFn(post, cmd).catch(e => {
+        const payload = {
+          meta: {
+            status: 500,
+            statusText: 'Internal Server Error',
+            headers: {}
+          },
+          payload: { foo: 'bar' }
+         }
+
+          equal(e instanceof Error, true)
+          deepEqual(e.payload, payload)
+      })
+    })
   })
 
   describe('httpPutFn', () => {
@@ -146,6 +217,37 @@ describe('handlers', () => {
         deepEqual(put.firstCall.args[0], 'http://www.example.com')
         deepEqual(put.firstCall.args[1], options)
         deepEqual(result.payload, { foo: 'bar' })
+      })
+    })
+
+    it('should make a post request and throw on non 200 status codes', () => {
+      const put = stub().returns(createResponsePromise({ foo: 'bar' }, { status: 500 }))
+      const cmd = {
+        type: 'httpPut',
+        url: 'http://www.example.com',
+        headers: {
+          test: 'header'
+        },
+        options: {
+          credentials: 'test'
+        },
+        payload: {
+          pay: 'load'
+        }
+      }
+
+      return httpPutFn(put, cmd).catch(e => {
+        const payload = {
+          meta: {
+            status: 500,
+            statusText: 'Internal Server Error',
+            headers: {}
+          },
+          payload: { foo: 'bar' }
+         }
+
+          equal(e instanceof Error, true)
+          deepEqual(e.payload, payload)
       })
     })
   })
