@@ -32,6 +32,22 @@ describe('handlers', () => {
         deepEqual(result.payload, { foo: 'bar' })
       })
     })
+
+    it('should make a get request and throw on non 200 status codes', () => {
+      const get = stub().returns(createResponsePromise({ foo: 'bar' }, { status: 500 }))
+      const cmd = {
+        type: 'httpGet',
+        url: 'http://www.example.com',
+        headers: {
+          test: 'header'
+        },
+        options: {
+          credentials: 'test'
+        }
+      }
+
+      return httpGetFn(get, cmd).catch(e => console.log(e))
+    })
   })
 
   describe('httpDeleteFn', () => {
