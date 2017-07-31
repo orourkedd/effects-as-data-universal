@@ -1,6 +1,6 @@
 {
   "name": "effects-as-data-universal",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Universal commands for effects-as-data",
   "main": "src/index.js",
   "repository": {
@@ -17,7 +17,6 @@
   "license": "MIT",
   "dependencies": {
     "fetch-everywhere": "^1.0.5",
-    "ramda": "^0.24.1",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

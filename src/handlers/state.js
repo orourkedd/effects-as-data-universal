@@ -1,8 +1,6 @@
-const { pick, merge } = require('ramda')
-
 function getGlobal() {
   let g
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     g = window
   } else {
     g = global
@@ -18,12 +16,15 @@ function getGlobalState() {
 
 function setGlobalState(payload) {
   const g = getGlobal()
-  g.effectsAsDataState = merge(g.effectsAsDataState, payload)
+  g.effectsAsDataState = Object.assign({}, g.effectsAsDataState, payload)
 }
 
 function getState({ keys }) {
   const state = getGlobalState()
-  return pick(keys, state)
+  return keys.reduce((p, c) => {
+    p[c] = state[c]
+    return p
+  }, {})
 }
 
 function setState({ payload }) {
