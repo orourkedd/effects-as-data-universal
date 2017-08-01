@@ -15,6 +15,7 @@
 -   [logError](#logerror)
 -   [now](#now)
 -   [randomNumber](#randomnumber)
+-   [retry](#retry)
 -   [getState](#getstate)
 -   [setState](#setstate)
 
@@ -640,7 +641,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should return the current timestamp', testExample(() => {
     return [
-      [null, cmds.randomNumber()],
+      [[null], cmds.randomNumber()],
       [0.123, 0.123]
     ]
   }))
@@ -668,6 +669,53 @@ call({}, handlers, example).then((n) => {
 ```
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `randomNumber`.
+
+
+## retry
+
+Create an `retry` action.  `yield` a `retry` to try a command at different intervals finally falling back to a default value.
+
+**Examples**
+
+```javascript
+//  Test It
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
+
+describe('example()', () => {
+  it('should retry 3 times then return the default value', testExample(() => {
+    const intervals = [10, 20, 30]
+    const defaultValue = 'defaultValue'
+    return [
+      [[null], cmds.retry(cmds.echo(false), intervals, defaultValue)],
+      [defaultValue, defaultValue]
+    ]
+  }))
+})
+```
+
+```javascript
+//  Write It
+const { cmds } = require('effects-as-data-universal')
+
+function * example () {
+  const intervals = [10, 20, 30]
+  const defaultValue = 'defaultValue'
+  const n = yield cmds.retry(cmds.echo(false), intervals, defaultValue)
+  return n
+}
+```
+
+```javascript
+//  Run It
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
+
+call({}, handlers, example)
+```
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `retry`.
 
 ## getState
 
