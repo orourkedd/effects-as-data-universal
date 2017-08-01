@@ -129,13 +129,12 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## either
 
-Creates an `either` action.  `yield` an `either` action to return the result on the action OR a default value if the result is falsy.
+Creates an `either` action.  `yield` an `either` action to return the result of the action OR the default value if the result is falsy.
 
 **Parameters**
 
--   `fn` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** an effects-as-data generator function.
--   `payload` **any?** the payload for the effects-as-data function.
--   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for `call` (optional, default `{}`)
+-   `command` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an effects-as-data command.
+-   `defaultValue` **any?** the fallback value if the command returns a falsy value.
 
 **Examples**
 
@@ -479,7 +478,7 @@ const { handlers } = require('effects-as-data-universal')
 const { call } = require('effects-as-data')
 
 call({}, handlers, example, { json: '{"foo": "bar"}' }).then((result) => {
-  result.payload.foo === 'bar' //  true
+  result.foo === 'bar' //  true
 })
 ```
 
@@ -621,7 +620,7 @@ const { handlers } = require('effects-as-data-universal')
 const { call } = require('effects-as-data')
 
 call({}, handlers, example).then((timestamp) => {
-  timestamp.payload === 1490030160103 //  true, if Date.now() returned 1490030160103
+  timestamp === 1490030160103 //  true, if Date.now() returned 1490030160103
 })
 ```
 
@@ -665,7 +664,7 @@ const { handlers } = require('effects-as-data-universal')
 const { call } = require('effects-as-data')
 
 call({}, handlers, example).then((n) => {
-  n.payload === 0.345 //  true, if Math.random() returned 0.345
+  n === 0.345 //  true, if Math.random() returned 0.345
 })
 ```
 
@@ -673,7 +672,13 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## retry
 
-Create an `retry` action.  `yield` a `retry` to try a command at different intervals finally falling back to a default value.
+Create an `retry` action.  `yield` a `retry` to try a command at the given intervals finally falling back to a default value if all tries fail.
+
+**Parameters**
+
+-   `command` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an effects-as-data command.
+-   `intervals` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** an array of times in miliseconds to retry the command on if the last try failed
+-   `defaultValue` **any?** the fallback value if the command returns a falsy value after all retries.
 
 **Examples**
 
@@ -769,6 +774,10 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 ## setImmediate
 
 Create an `setImmediate` action.  `yield` a `setImmediate` to send the command to the end of the call queue.
+
+**Parameters**
+
+-   `command` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an effects-as-data command.
 
 **Examples**
 
