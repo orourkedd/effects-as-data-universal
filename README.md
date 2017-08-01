@@ -513,7 +513,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should log a message', testExample(() => {
     return [
-      [{ message: 'foo' }, cmds.logError('foo')],
+      [[{ message: 'foo' }], cmds.logError('foo')],
       [null, null]
     ]
   }))
@@ -559,7 +559,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should return the current timestamp', testExample(() => {
     return [
-      [null, cmds.now()],
+      [[null], cmds.now()],
       [123456, 123456]
     ]
   }))
@@ -655,7 +655,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should return user from application state', testExample(() => {
     return [
-      [null, cmds.getState(['user'])],
+      [[null], cmds.getState(['user'])],
       [{ id: '123', username: 'foo' }, { id: '123', username: 'foo' }]
     ]
   }))
@@ -706,7 +706,7 @@ describe('example()', () => {
   it('should set a user on the application state', testExample(() => {
     const user = { user: '123' }
     return [
-      [user, cmds.setState({ user })],
+      [[user], cmds.setState({ user })],
       [null, null]
     ]
   }))
