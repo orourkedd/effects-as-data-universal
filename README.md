@@ -17,6 +17,7 @@
 -   [randomNumber](#randomnumber)
 -   [retry](#retry)
 -   [getState](#getstate)
+-   [setImmediate](#setImmediate)
 -   [setState](#setstate)
 
 ## call
@@ -670,7 +671,6 @@ call({}, handlers, example).then((n) => {
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `randomNumber`.
 
-
 ## retry
 
 Create an `retry` action.  `yield` a `retry` to try a command at different intervals finally falling back to a default value.
@@ -764,6 +764,49 @@ call({}, handlers, example).then((user) => {
 ```
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `getState`.
+
+
+## setImmediate
+
+Create an `setImmediate` action.  `yield` a `setImmediate` to send the command to the end of the call queue.
+
+**Examples**
+
+```javascript
+//  Test It
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
+
+describe('example()', () => {
+  it('should use setImmediate', testExample(() => {
+    return [
+      [[null], cmds.setImmediate(cmds.echo('hello world'))],
+      [null, null]
+    ]
+  }))
+})
+```
+
+```javascript
+//  Write It
+const { cmds } = require('effects-as-data-universal')
+
+function * example () {
+  const n = yield cmds.setImmediate(cmds.echo('hello world'))
+  return n
+}
+```
+
+```javascript
+//  Run It
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
+
+call({}, handlers, example)
+```
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `setImmediate`.
 
 ## setState
 
