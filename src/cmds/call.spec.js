@@ -5,10 +5,10 @@ describe('call.js', () => {
   describe('#call', () => {
     it('should return a call cmd', () => {
       const fn = function*() {}
-      const a = call(fn, 'payload')
+      const a = call(fn, 'foo', 'bar')
       deepEqual(a, {
         type: 'call',
-        payload: 'payload',
+        args: ['foo', 'bar'],
         fn
       })
     })

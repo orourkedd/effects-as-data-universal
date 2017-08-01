@@ -1,8 +1,8 @@
-function call(fn, payload) {
+function call(fn, ...args) {
   return {
     type: 'call',
     fn,
-    payload
+    args
   }
 }
 
