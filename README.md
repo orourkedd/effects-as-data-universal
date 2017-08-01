@@ -33,16 +33,16 @@ Creates a `call` action.  `yield` a `call` action to call another effects-as-dat
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
 
-const testExample = testIt(example)
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should call an effects-as-data function', testExample(() => {
     return [
-      ['123', actions.call(getUser, { id: '123' })],
-      [{ id: '123', username: 'foo' }, success({ id: '123', username: 'foo' })]
+      [[{ id: '123' }], cmds.call(getUser, { id: '123' })],
+      [{ id: '123', username: 'foo' }, { id: '123', username: 'foo' }]
     ]
   }))
 })
@@ -50,24 +50,25 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * getUser ({ id }) {
- const user = yield actions.httpGet(`https://example.com/api/v1/users/${id}`)
+ const user = yield cmds.httpGet(`https://example.com/api/v1/users/${id}`)
  return user
 }
 
 function * example ({ id }) {
-  const result = yield actions.call(getUser, { id })
+  const result = yield cmds.call(getUser, { id })
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { id: '123' }).then((user) => {
+call({}, handlers, example, { id: '123' }).then((user) => {
   user.payload.id === '123' //  true
   user.payload.username === 'foo' //  true, if a user with an id of '123' has the `username` 'foo'.
 })
@@ -89,16 +90,16 @@ Creates an `echo` action.  `yield` an `echo` action for the handler to return `p
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should return its argument', testExample(() => {
     const value = { foo: 'bar' }
     return [
-      [{ value }, actions.echo(value)],
-      [value, success(value)]
+      [[{ value }], cmds.echo(value)],
+      [value, value]
     ]
   }))
 })
@@ -106,19 +107,21 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example ({ value }) {
-  const result = yield actions.echo(value)
+  const result = yield cmds.echo(value)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { value: 32 }).then((result) => {
+call({}, handlers, example, { value: 32 }).then((result) => {
+  console.log(fda)
   result.payload === 32 //  true
 })
 ```
@@ -135,15 +138,15 @@ Creates a `guid` action.  `yield` a `guid` action to get a shiny new guid.
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should return a guid', testExample(() => {
     return [
-      [null, actions.guid()],
-      ['83feb66e-cf36-40a3-ad23-a150f0b7ed4d', success('83feb66e-cf36-40a3-ad23-a150f0b7ed4d')]
+      [null, cmds.guid()],
+      ['83feb66e-cf36-40a3-ad23-a150f0b7ed4d', '83feb66e-cf36-40a3-ad23-a150f0b7ed4d']
     ]
   }))
 })
@@ -151,19 +154,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example () {
-  const result = yield actions.guid()
+  const result = yield cmds.guid()
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example).then((result) => {
+call({}, handlers, example).then((result) => {
   result.payload === '15270902-2798-4c34-aaa8-9a55726b58af' //  true, if `uuid.v4()` returned '15270902-2798-4c34-aaa8-9a55726b58af'
 })
 ```
@@ -186,15 +190,15 @@ Creates a `httpGet` action.  `yield` an `httpGet` action to do an http GET reque
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should return a result from GET', testExample(() => {
     return [
-      [{ url: 'http://www.example.com' }, actions.httpGet('http://www.example.com')],
-      [{ foo: 'bar' }, success({ foo: 'bar' })]
+      [{ url: 'http://www.example.com' }, cmds.httpGet('http://www.example.com')],
+      [{ foo: 'bar' }, { foo: 'bar' }]
     ]
   }))
 })
@@ -202,20 +206,21 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example ({ url }) {
-  const result = yield actions.httpGet(url)
+  const result = yield cmds.httpGet(url)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
 const url = 'https://www.example.com/api/v1/something'
-run(handlers, example, { url }).then((result) => {
+call({}, handlers, example, { url }).then((result) => {
   result.payload === { foo: 'bar' } //  true, if a GET to `url` returned `{ foo: 'bar' }`
 })
 ```
@@ -239,16 +244,16 @@ Creates a `httpPost` action.  `yield` an `httpPost` action to do an http POST re
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should POST payload to url', testExample(() => {
     const url = 'http://www.example.com/api/v1/user'
     return [
-      [{ url }, actions.httpPost(url, { foo: 'bar' })],
-      [success(), success()]
+      [{ url }, cmds.httpPost(url, { foo: 'bar' })],
+      [null, null]
     ]
   }))
 })
@@ -256,19 +261,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example (payload) {
-  const result = yield actions.httpPost('http://www.example.com/api/v1/user', payload)
+  const result = yield cmds.httpPost('http://www.example.com/api/v1/user', payload)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { foo: 'bar' }).then((result) => {
+call({}, handlers, example, { foo: 'bar' }).then((result) => {
   result.success === true //  true, if a POST was successful
 })
 ```
@@ -292,16 +298,16 @@ Creates a `httpPut` action.  `yield` an `httpPut` action to do an http PUT reque
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should PUT payload to url', testExample(() => {
     const url = 'http://www.example.com/api/v1/user'
     return [
-      [{ url }, actions.httpPut(url, { foo: 'bar' })],
-      [success(), success()]
+      [{ url }, cmds.httpPut(url, { foo: 'bar' })],
+      [null, null]
     ]
   }))
 })
@@ -309,19 +315,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example (payload) {
-  const result = yield actions.httpPut('http://www.example.com/api/v1/user', payload)
+  const result = yield cmds.httpPut('http://www.example.com/api/v1/user', payload)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { foo: 'bar' }).then((result) => {
+call({}, handlers, example, { foo: 'bar' }).then((result) => {
   result.success === true //  true, if a PUT was successful
 })
 ```
@@ -344,15 +351,15 @@ Creates a `httpDelete` action.  `yield` an `httpDelete` action to do an http DEL
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should return a result from DELETE', testExample(() => {
     return [
-      [{ id: '32' }, actions.httpDelete('http://www.example.com/api/v1/user/32')],
-      [success(), success())]
+      [{ id: '32' }, cmds.httpDelete('http://www.example.com/api/v1/user/32')],
+      [null, null)]
     ]
   }))
 })
@@ -360,19 +367,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example ({ id }) {
-  const result = yield actions.httpDelete(`http://www.example.com/api/v1/user/${id}`)
+  const result = yield cmds.httpDelete(`http://www.example.com/api/v1/user/${id}`)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { id: '123' }).then((result) => {
+call({}, handlers, example, { id: '123' }).then((result) => {
   result.success === true //  true, if a DELETE to http://www.example.com/api/v1/user/123 was successful
 })
 ```
@@ -393,16 +401,16 @@ Creates a `jsonParse` action.  `yield` a `jsonParse` action to parse a JSON stri
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
 
-const testExample = testIt(example)
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should parse a JSON string', testExample(() => {
     return [
-      [{ json: '{"foo": "bar"}' }, actions.jsonParse('{"foo": "bar"}')],
-      [{ foo: 'bar' }, success({ foo: 'bar' })]
+      [{ json: '{"foo": "bar"}' }, cmds.jsonParse('{"foo": "bar"}')],
+      [{ foo: 'bar' }, { foo: 'bar' }]
     ]
   }))
 })
@@ -410,19 +418,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example ({ json }) {
-  const result = yield actions.jsonParse(json)
+  const result = yield cmds.jsonParse(json)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { json: '{"foo": "bar"}' }).then((result) => {
+call({}, handlers, example, { json: '{"foo": "bar"}' }).then((result) => {
   result.payload.foo === 'bar' //  true
 })
 ```
@@ -443,16 +452,16 @@ Creates a `logInfo` action.  `yield` a `logInfo` action to log to the console us
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
 
-const testExample = testIt(example)
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should log a message', testExample(() => {
     return [
-      [{ message: 'foo' }, actions.logInfo('foo')],
-      [null, success()]
+      [{ message: 'foo' }, cmds.logInfo('foo')],
+      [null, null]
     ]
   }))
 })
@@ -460,19 +469,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example ({ message }) {
-  const result = yield actions.logInfo(message)
+  const result = yield cmds.logInfo(message)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { message: 'bar' }).then((result) => {
+call({}, handlers, example, { message: 'bar' }).then((result) => {
   //  "bar" should have been `console.info`ed
 })
 ```
@@ -493,16 +503,16 @@ Creates a `logError` action.  `yield` a `logError` action to log to the console 
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
 
-const testExample = testIt(example)
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should log a message', testExample(() => {
     return [
-      [{ message: 'foo' }, actions.logError('foo')],
-      [null, success()]
+      [{ message: 'foo' }, cmds.logError('foo')],
+      [null, null]
     ]
   }))
 })
@@ -510,19 +520,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example ({ message }) {
-  const result = yield actions.logError(message)
+  const result = yield cmds.logError(message)
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example, { message: 'bar' }).then((result) => {
+call({}, handlers, example, { message: 'bar' }).then((result) => {
   //  "bar" should have been `console.error`ed
 })
 ```
@@ -539,15 +550,15 @@ Create an `now` action.  `yield` a `now` action to get the current timestamp fro
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should return the current timestamp', testExample(() => {
     return [
-      [null, actions.now()],
-      [123456, success(123456)]
+      [null, cmds.now()],
+      [123456, 123456]
     ]
   }))
 })
@@ -555,19 +566,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example () {
-  const timestamp = yield actions.now()
+  const timestamp = yield cmds.now()
   return timestamp
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example).then((timestamp) => {
+call({}, handlers, example).then((timestamp) => {
   timestamp.payload === 1490030160103 //  true, if Date.now() returned 1490030160103
 })
 ```
@@ -584,15 +596,15 @@ Create an `randomNumber` action.  `yield` a `randomNumber` to get a random numbe
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should return the current timestamp', testExample(() => {
     return [
-      [null, actions.randomNumber()],
-      [0.123, success(0.123)]
+      [null, cmds.randomNumber()],
+      [0.123, 0.123]
     ]
   }))
 })
@@ -600,19 +612,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example () {
-  const n = yield actions.randomNumber()
+  const n = yield cmds.randomNumber()
   return n
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example).then((n) => {
+call({}, handlers, example).then((n) => {
   n.payload === 0.345 //  true, if Math.random() returned 0.345
 })
 ```
@@ -633,15 +646,15 @@ Creates a `getState` action.  `yield` a `getState` to get application state.
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should return user from application state', testExample(() => {
     return [
-      [null, actions.getState(['user'])],
-      [{ id: '123', username: 'foo' }, success({ id: '123', username: 'foo' })]
+      [null, cmds.getState(['user'])],
+      [{ id: '123', username: 'foo' }, { id: '123', username: 'foo' }]
     ]
   }))
 })
@@ -649,19 +662,20 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example () {
-  const user = yield actions.getState(['user'])
+  const user = yield cmds.getState(['user'])
   return user
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
-run(handlers, example).then((user) => {
+call({}, handlers, example).then((user) => {
   user.id === 'abc' //  true, if the user has an `id` of 'abc'
 })
 ```
@@ -682,16 +696,16 @@ Creates a `setState` action.  `yield` a `setState` to set application state.
 
 ```javascript
 //  Test It
-const { testIt } = require('effects-as-data/test')
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
-const testExample = testIt(example)
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
 
 describe('example()', () => {
   it('should set a user on the application state', testExample(() => {
     const user = { user: '123' }
     return [
-      [user, actions.setState({ user })],
-      [null, success()]
+      [user, cmds.setState({ user })],
+      [null, null]
     ]
   }))
 })
@@ -699,21 +713,22 @@ describe('example()', () => {
 
 ```javascript
 //  Write It
-const { actions } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { cmds } = require('effects-as-data-universal')
 
 function * example (user) {
-  const result = yield actions.setState({ user })
+  const result = yield cmds.setState({ user })
   return result
 }
 ```
 
 ```javascript
 //  Run It
-const { handlers, run } = require('effects-as-data-universal') //  also available in require('effects-as-data/node')
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
 
 const user = { id: '123', username: 'foo' }
-run(handlers, example, user).then((result) => {
-  result.success === true //  true, and `user` should be available on the application state using `actions.getState(['user'])`
+call({}, handlers, example, user).then((result) => {
+  result.success === true //  true, and `user` should be available on the application state using `cmds.getState(['user'])`
 })
 ```
 
