@@ -10,6 +10,7 @@ const { logInfo, logError } = require('./log')
 const { now } = require('./now')
 const { randomNumber } = require('./random-number')
 const { retry } = require('./retry')
+const { hit } = require('./hit')
 
 module.exports = {
   setImmediate,
@@ -28,5 +29,6 @@ module.exports = {
   now,
   randomNumber,
   setState,
-  retry
+  retry,
+  hit
 }

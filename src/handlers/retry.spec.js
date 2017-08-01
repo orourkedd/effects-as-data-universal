@@ -2,7 +2,7 @@ const { retry } = require('./retry')
 const cmds = require('../cmds')
 
 test('retry', () => {
-  const durations = [100, 500, 1000]
+  const durations = [10, 20, 30]
   let count = 0
   const call = (config, handlers, fn) => {
     const g = fn()
