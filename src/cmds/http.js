@@ -1,51 +1,49 @@
-const { merge } = require('ramda')
-
 const defaultHeaders = {
-  'Content-Type': 'application/json;charset=UTF-8',
+  "Content-Type": "application/json;charset=UTF-8"
 }
 
 function httpGet(url, headers = {}, options = {}) {
   return {
-    type: 'httpGet',
+    type: "httpGet",
     url,
     headers,
-    options,
+    options
   }
 }
 
 function httpPost(url, payload, headers = {}, options = {}) {
   return {
-    type: 'httpPost',
+    type: "httpPost",
     url,
     payload,
-    headers: merge(defaultHeaders, headers),
-    options,
+    headers: Object.assign({}, defaultHeaders, headers),
+    options
   }
 }
 
 function httpPut(url, payload, headers = {}, options = {}) {
   return {
-    type: 'httpPut',
+    type: "httpPut",
     url,
     payload,
-    headers: merge(defaultHeaders, headers),
-    options,
+    headers: Object.assign({}, defaultHeaders, headers),
+    options
   }
 }
 
 function httpDelete(url, headers = {}, options = {}) {
   return {
-    type: 'httpDelete',
+    type: "httpDelete",
     url,
     headers,
-    options,
+    options
   }
 }
 
 function rpc(url, fn, payload) {
   return httpPost(url, {
     fn,
-    payload,
+    payload
   })
 }
 
@@ -54,5 +52,5 @@ module.exports = {
   httpPut,
   httpGet,
   httpDelete,
-  rpc,
+  rpc
 }

@@ -1,55 +1,52 @@
-const { mergeAll, keys } = require('ramda')
-const fetch = require('fetch-everywhere')
+const fetch = require("fetch-everywhere")
 
 const defaultHeaders = {
-  'Content-Type': 'application/json;charset=UTF-8'
+  "Content-Type": "application/json;charset=UTF-8"
 }
 
 function httpGetFn(get, { url, headers, options }) {
   const defaultOptions = {
-    method: 'GET',
-    credentials: 'include'
+    method: "GET",
+    credentials: "include"
   }
-  const allOptions = mergeAll([defaultOptions, options, { headers }])
+  const allOptions = Object.assign({}, defaultOptions, options, { headers })
   return get(url, allOptions).then(checkStatus).then(parse)
 }
 
 function httpDeleteFn(remove, { url, headers, options }) {
   const defaultOptions = {
-    method: 'DELETE',
-    credentials: 'include'
+    method: "DELETE",
+    credentials: "include"
   }
-  const allOptions = mergeAll([defaultOptions, options, { headers }])
+  const allOptions = Object.assign({}, defaultOptions, options, { headers })
   return remove(url, allOptions).then(checkStatus).then(parse)
 }
 
 function httpPostFn(post, { url, payload, headers, options }) {
   const defaultOptions = {
-    method: 'POST',
-    credentials: 'include',
+    method: "POST",
+    credentials: "include",
     body: JSON.stringify(payload),
     headers: defaultHeaders
   }
-  const allOptions = mergeAll([
-    defaultOptions,
-    options,
-    { headers, body: JSON.stringify(payload) }
-  ])
+  const allOptions = Object.assign({}, defaultOptions, options, {
+    headers,
+    body: JSON.stringify(payload)
+  })
   return post(url, allOptions).then(checkStatus).then(parse)
 }
 
 function httpPutFn(put, { url, payload, headers, options }) {
   const defaultOptions = {
-    method: 'PUT',
-    credentials: 'include',
+    method: "PUT",
+    credentials: "include",
     body: JSON.stringify(payload),
     headers: defaultHeaders
   }
-  const allOptions = mergeAll([
-    defaultOptions,
-    options,
-    { headers, body: JSON.stringify(payload) }
-  ])
+  const allOptions = Object.assign({}, defaultOptions, options, {
+    headers,
+    body: JSON.stringify(payload)
+  })
   return put(url, allOptions).then(checkStatus).then(parse)
 }
 
@@ -87,8 +84,8 @@ function parse(r) {
 
 function parseHeaders(httpResponse) {
   let headersRaw = httpResponse.headers._headers
-  return keys(headersRaw).reduce((p, c) => {
-    p[c] = headersRaw[c].join('')
+  return Object.keys(headersRaw).reduce((p, c) => {
+    p[c] = headersRaw[c].join("")
     return p
   }, {})
 }
