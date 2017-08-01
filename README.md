@@ -4,6 +4,7 @@
 
 -   [call](#call)
 -   [echo](#echo)
+-   [either](#either)
 -   [guid](#guid)
 -   [httpGet](#httpget)
 -   [httpPost](#httppost)
@@ -18,8 +19,6 @@
 -   [setState](#setstate)
 
 ## call
-
-[src/actions/universal/call.js:43-50](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/call.js#L43-L50 "Source code on GitHub")
 
 Creates a `call` action.  `yield` a `call` action to call another effects-as-data function.  `call` is used to compose effects-as-data functions in a testible manner.
 
@@ -78,8 +77,6 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## echo
 
-[src/actions/universal/echo.js:35-40](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/echo.js#L35-L40 "Source code on GitHub")
-
 Creates an `echo` action.  `yield` an `echo` action for the handler to return `payload`.  This is used as a placeholder when multiple actions are being `yield`ed and some of the actions need to be `yield`ed conditionally.
 
 **Parameters**
@@ -128,9 +125,65 @@ call({}, handlers, example, { value: 32 }).then((result) => {
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `echo`.
 
-## guid
+## either
 
-[src/actions/universal/guid.js:33-37](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/guid.js#L33-L37 "Source code on GitHub")
+Creates an `either` action.  `yield` an `either` action to return the result on the action OR a default value if the result is falsy.
+
+**Parameters**
+
+-   `fn` **[Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)** an effects-as-data generator function.
+-   `payload` **any?** the payload for the effects-as-data function.
+-   `options` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)?** options for `call` (optional, default `{}`)
+
+**Examples**
+
+```javascript
+//  Test It
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+
+const testExample = testFn(example)
+
+describe('example()', () => {
+  it('successful call', testExample(() => {
+    return [
+      [[25], cmds.either(cmds.echo(25), 5)],
+      [25, 25]
+    ]
+  }))
+
+  it('default value', testExample(() => {
+    return [
+      [[false], cmds.either(cmds.echo(false), 5)],
+      [5, 5]
+    ]
+  }))
+})
+```
+
+```javascript
+//  Write It
+const { cmds } = require('effects-as-data-universal')
+
+function * example (bool) {
+  const result = yield cmds.either(cmds.echo(bool), 5)
+  return result
+}
+```
+
+```javascript
+//  Run It
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
+
+call({}, handlers, example, { id: '123' }).then((result) => {
+  result // 5
+})
+```
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `either`.
+
+## guid
 
 Creates a `guid` action.  `yield` a `guid` action to get a shiny new guid.
 
@@ -175,8 +228,6 @@ call({}, handlers, example).then((result) => {
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `guid`.
 
 ## httpGet
-
-[src/actions/universal/http.js:43-50](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/http.js#L43-L50 "Source code on GitHub")
 
 Creates a `httpGet` action.  `yield` an `httpGet` action to do an http GET request.
 
@@ -228,8 +279,6 @@ call({}, handlers, example, { url }).then((result) => {
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `httpGet`.
 
 ## httpPost
-
-[src/actions/universal/http.js:89-97](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/http.js#L89-L97 "Source code on GitHub")
 
 Creates a `httpPost` action.  `yield` an `httpPost` action to do an http POST request.
 
@@ -284,8 +333,6 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## httpPut
 
-[src/actions/universal/http.js:136-144](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/http.js#L136-L144 "Source code on GitHub")
-
 Creates a `httpPut` action.  `yield` an `httpPut` action to do an http PUT request.
 
 **Parameters**
@@ -339,8 +386,6 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## httpDelete
 
-[src/actions/universal/http.js:181-188](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/http.js#L181-L188 "Source code on GitHub")
-
 Creates a `httpDelete` action.  `yield` an `httpDelete` action to do an http DELETE request.
 
 **Parameters**
@@ -391,8 +436,6 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## jsonParse
 
-[src/actions/universal/json-parse.js:35-40](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/json-parse.js#L35-L40 "Source code on GitHub")
-
 Creates a `jsonParse` action.  `yield` a `jsonParse` action to parse a JSON string.  Why not just use `JSON.parse()` inline?  Although a successful parsing operation is deterministic, a failed parsing operation is not.
 
 **Parameters**
@@ -441,8 +484,6 @@ call({}, handlers, example, { json: '{"foo": "bar"}' }).then((result) => {
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `jsonParse`.
 
 ## logInfo
-
-[src/actions/universal/log.js:35-40](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/log.js#L35-L40 "Source code on GitHub")
 
 Creates a `logInfo` action.  `yield` a `logInfo` action to log to the console using `console.info`.
 
@@ -493,8 +534,6 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## logError
 
-[src/actions/universal/log.js:76-81](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/log.js#L76-L81 "Source code on GitHub")
-
 Creates a `logError` action.  `yield` a `logError` action to log to the console using `console.error`.
 
 **Parameters**
@@ -544,8 +583,6 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## now
 
-[src/actions/universal/now.js:33-37](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/now.js#L33-L37 "Source code on GitHub")
-
 Create an `now` action.  `yield` a `now` action to get the current timestamp from `Date.now()`.
 
 **Examples**
@@ -590,8 +627,6 @@ Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 
 ## randomNumber
 
-[src/actions/universal/random-number.js:33-37](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/random-number.js#L33-L37 "Source code on GitHub")
-
 Create an `randomNumber` action.  `yield` a `randomNumber` to get a random number using `Math.random()`.
 
 **Examples**
@@ -635,8 +670,6 @@ call({}, handlers, example).then((n) => {
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `randomNumber`.
 
 ## getState
-
-[src/actions/universal/state.js:34-39](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/state.js#L34-L39 "Source code on GitHub")
 
 Creates a `getState` action.  `yield` a `getState` to get application state.
 
@@ -685,8 +718,6 @@ call({}, handlers, example).then((user) => {
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `getState`.
 
 ## setState
-
-[src/actions/universal/state.js:76-81](https://github.com-orourkedd/orourkedd/effects-as-data/blob/da7c6768fa7dfc99630600a48caa1dcf34783497/src/actions/universal/state.js#L76-L81 "Source code on GitHub")
 
 Creates a `setState` action.  `yield` a `setState` to set application state.
 
