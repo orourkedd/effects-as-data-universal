@@ -1,4 +1,4 @@
-# Actions packaged with effects-as-data-universal
+# Commands packaged with effects-as-data-universal
 
 ### Table of Contents
 
@@ -22,7 +22,7 @@
 
 ## call
 
-Creates a `call` action.  `yield` a `call` action to call another effects-as-data function.  `call` is used to compose effects-as-data functions in a testible manner.
+Creates a `call` cmd.  `yield` a `call` cmd to call another effects-as-data function.  `call` is used to compose effects-as-data functions in a testible manner.
 
 **Parameters**
 
@@ -75,11 +75,11 @@ call({}, handlers, example, { id: '123' }).then((user) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `call`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `call`.
 
 ## echo
 
-Creates an `echo` action.  `yield` an `echo` action for the handler to return `payload`.  This is used as a placeholder when multiple actions are being `yield`ed and some of the actions need to be `yield`ed conditionally.
+Creates an `echo` cmd.  `yield` an `echo` cmd for the handler to return `payload`.  This is used as a placeholder when multiple are being `yield`ed and some of the cmds need to be `yield`ed conditionally.
 
 **Parameters**
 
@@ -125,11 +125,11 @@ call({}, handlers, example, { value: 32 }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `echo`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `echo`.
 
 ## either
 
-Creates an `either` action.  `yield` an `either` action to return the result of the action OR the default value if the result is falsy.
+Creates an `either` cmd.  `yield` an `either` cmd to return the result of the cmd OR the default value if the result is falsy.
 
 **Parameters**
 
@@ -182,11 +182,11 @@ call({}, handlers, example, { id: '123' }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `either`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `either`.
 
 ## guid
 
-Creates a `guid` action.  `yield` a `guid` action to get a shiny new guid.
+Creates a `guid` cmd.  `yield` a `guid` cmd to get a shiny new guid.
 
 **Examples**
 
@@ -226,11 +226,11 @@ call({}, handlers, example).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `guid`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `guid`.
 
 ## httpGet
 
-Creates a `httpGet` action.  `yield` an `httpGet` action to do an http GET request.
+Creates a `httpGet` cmd.  `yield` an `httpGet` cmd to do an http GET request.
 
 **Parameters**
 
@@ -277,11 +277,11 @@ call({}, handlers, example, { url }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `httpGet`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `httpGet`.
 
 ## httpPost
 
-Creates a `httpPost` action.  `yield` an `httpPost` action to do an http POST request.
+Creates a `httpPost` cmd.  `yield` an `httpPost` cmd to do an http POST request.
 
 **Parameters**
 
@@ -330,11 +330,11 @@ call({}, handlers, example, { foo: 'bar' }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `httpPost`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `httpPost`.
 
 ## httpPut
 
-Creates a `httpPut` action.  `yield` an `httpPut` action to do an http PUT request.
+Creates a `httpPut` cmd.  `yield` an `httpPut` cmd to do an http PUT request.
 
 **Parameters**
 
@@ -383,11 +383,11 @@ call({}, handlers, example, { foo: 'bar' }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `httpPut`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `httpPut`.
 
 ## httpDelete
 
-Creates a `httpDelete` action.  `yield` an `httpDelete` action to do an http DELETE request.
+Creates a `httpDelete` cmd.  `yield` an `httpDelete` cmd to do an http DELETE request.
 
 **Parameters**
 
@@ -433,11 +433,11 @@ call({}, handlers, example, { id: '123' }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `httpDelete`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `httpDelete`.
 
 ## jsonParse
 
-Creates a `jsonParse` action.  `yield` a `jsonParse` action to parse a JSON string.  Why not just use `JSON.parse()` inline?  Although a successful parsing operation is deterministic, a failed parsing operation is not.
+Creates a `jsonParse` cmd.  `yield` a `jsonParse` cmd to parse a JSON string.  Why not just use `JSON.parse()` inline?  Although a successful parsing operation is deterministic, a failed parsing operation is not.
 
 **Parameters**
 
@@ -482,11 +482,11 @@ call({}, handlers, example, { json: '{"foo": "bar"}' }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `jsonParse`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `jsonParse`.
 
 ## logInfo
 
-Creates a `logInfo` action.  `yield` a `logInfo` action to log to the console using `console.info`.
+Creates a `logInfo` cmd.  `yield` a `logInfo` cmd to log to the console using `console.info`.
 
 **Parameters**
 
@@ -531,11 +531,11 @@ call({}, handlers, example, { message: 'bar' }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `logInfo`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `logInfo`.
 
 ## logError
 
-Creates a `logError` action.  `yield` a `logError` action to log to the console using `console.error`.
+Creates a `logError` cmd.  `yield` a `logError` cmd to log to the console using `console.error`.
 
 **Parameters**
 
@@ -580,11 +580,11 @@ call({}, handlers, example, { message: 'bar' }).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `logError`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `logError`.
 
 ## now
 
-Create an `now` action.  `yield` a `now` action to get the current timestamp from `Date.now()`.
+Create an `now` cmd.  `yield` a `now` cmd to get the current timestamp from `Date.now()`.
 
 **Examples**
 
@@ -624,11 +624,11 @@ call({}, handlers, example).then((timestamp) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `now`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `now`.
 
 ## randomNumber
 
-Create an `randomNumber` action.  `yield` a `randomNumber` to get a random number using `Math.random()`.
+Create an `randomNumber` cmd.  `yield` a `randomNumber` to get a random number using `Math.random()`.
 
 **Examples**
 
@@ -668,11 +668,11 @@ call({}, handlers, example).then((n) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `randomNumber`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `randomNumber`.
 
 ## retry
 
-Create an `retry` action.  `yield` a `retry` to try a command at the given intervals finally falling back to a default value if all tries fail.
+Create an `retry` cmd.  `yield` a `retry` to try a command at the given intervals finally falling back to a default value if all tries fail.
 
 **Parameters**
 
@@ -720,11 +720,11 @@ const { call } = require('effects-as-data')
 call({}, handlers, example)
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `retry`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `retry`.
 
 ## getState
 
-Creates a `getState` action.  `yield` a `getState` to get application state.
+Creates a `getState` cmd.  `yield` a `getState` to get application state.
 
 **Parameters**
 
@@ -768,12 +768,12 @@ call({}, handlers, example).then((user) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `getState`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `getState`.
 
 
 ## setImmediate
 
-Create an `setImmediate` action.  `yield` a `setImmediate` to send the command to the end of the call queue.
+Create an `setImmediate` cmd.  `yield` a `setImmediate` to send the command to the end of the call queue.
 
 **Parameters**
 
@@ -815,11 +815,11 @@ const { call } = require('effects-as-data')
 call({}, handlers, example)
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `setImmediate`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `setImmediate`.
 
 ## setState
 
-Creates a `setState` action.  `yield` a `setState` to set application state.
+Creates a `setState` cmd.  `yield` a `setState` to set application state.
 
 **Parameters**
 
@@ -865,4 +865,4 @@ call({}, handlers, example, user).then((result) => {
 })
 ```
 
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an action of type `setState`.
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `setState`.
