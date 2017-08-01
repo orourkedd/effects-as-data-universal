@@ -1,4 +1,4 @@
-# Commands packaged with effects-as-data-universal
+# Commands for effects-as-data that can run in node or in the browser
 
 ### Table of Contents
 
