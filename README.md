@@ -122,7 +122,7 @@ const { call } = require('effects-as-data')
 
 call({}, handlers, example, { value: 32 }).then((result) => {
   console.log(fda)
-  result.payload === 32 //  true
+  result === 32 //  true
 })
 ```
 
@@ -145,7 +145,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should return a guid', testExample(() => {
     return [
-      [null, cmds.guid()],
+      [[null], cmds.guid()],
       ['83feb66e-cf36-40a3-ad23-a150f0b7ed4d', '83feb66e-cf36-40a3-ad23-a150f0b7ed4d']
     ]
   }))
@@ -168,7 +168,7 @@ const { handlers } = require('effects-as-data-universal')
 const { call } = require('effects-as-data')
 
 call({}, handlers, example).then((result) => {
-  result.payload === '15270902-2798-4c34-aaa8-9a55726b58af' //  true, if `uuid.v4()` returned '15270902-2798-4c34-aaa8-9a55726b58af'
+  result === '15270902-2798-4c34-aaa8-9a55726b58af' //  true, if `uuid.v4()` returned '15270902-2798-4c34-aaa8-9a55726b58af'
 })
 ```
 
@@ -197,7 +197,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should return a result from GET', testExample(() => {
     return [
-      [{ url: 'http://www.example.com' }, cmds.httpGet('http://www.example.com')],
+      [[{ url: 'http://www.example.com' }], cmds.httpGet('http://www.example.com')],
       [{ foo: 'bar' }, { foo: 'bar' }]
     ]
   }))
@@ -221,7 +221,7 @@ const { call } = require('effects-as-data')
 
 const url = 'https://www.example.com/api/v1/something'
 call({}, handlers, example, { url }).then((result) => {
-  result.payload === { foo: 'bar' } //  true, if a GET to `url` returned `{ foo: 'bar' }`
+  result.payload // Request payload
 })
 ```
 
@@ -251,8 +251,9 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should POST payload to url', testExample(() => {
     const url = 'http://www.example.com/api/v1/user'
+    const payload = { foo: 'bar' }
     return [
-      [{ url }, cmds.httpPost(url, { foo: 'bar' })],
+      [[payload], cmds.httpPost(url, payload)],
       [null, null]
     ]
   }))
@@ -275,7 +276,7 @@ const { handlers } = require('effects-as-data-universal')
 const { call } = require('effects-as-data')
 
 call({}, handlers, example, { foo: 'bar' }).then((result) => {
-  result.success === true //  true, if a POST was successful
+  result.payload // Request payload
 })
 ```
 
@@ -305,8 +306,9 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should PUT payload to url', testExample(() => {
     const url = 'http://www.example.com/api/v1/user'
+    const payload = { foo: 'bar' }
     return [
-      [{ url }, cmds.httpPut(url, { foo: 'bar' })],
+      [[payload], cmds.httpPut(url, payload)],
       [null, null]
     ]
   }))
@@ -329,7 +331,7 @@ const { handlers } = require('effects-as-data-universal')
 const { call } = require('effects-as-data')
 
 call({}, handlers, example, { foo: 'bar' }).then((result) => {
-  result.success === true //  true, if a PUT was successful
+  result.payload // Request payload
 })
 ```
 
@@ -358,8 +360,8 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should return a result from DELETE', testExample(() => {
     return [
-      [{ id: '32' }, cmds.httpDelete('http://www.example.com/api/v1/user/32')],
-      [null, null)]
+      [[{ id: '32' }], cmds.httpDelete('http://www.example.com/api/v1/user/32')],
+      [null, null]
     ]
   }))
 })
@@ -381,7 +383,7 @@ const { handlers } = require('effects-as-data-universal')
 const { call } = require('effects-as-data')
 
 call({}, handlers, example, { id: '123' }).then((result) => {
-  result.success === true //  true, if a DELETE to http://www.example.com/api/v1/user/123 was successful
+  result.payload // Request payload
 })
 ```
 
@@ -409,7 +411,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should parse a JSON string', testExample(() => {
     return [
-      [{ json: '{"foo": "bar"}' }, cmds.jsonParse('{"foo": "bar"}')],
+      [[{ json: '{"foo": "bar"}' }], cmds.jsonParse('{"foo": "bar"}')],
       [{ foo: 'bar' }, { foo: 'bar' }]
     ]
   }))
@@ -460,7 +462,7 @@ const testExample = testFn(example)
 describe('example()', () => {
   it('should log a message', testExample(() => {
     return [
-      [{ message: 'foo' }, cmds.logInfo('foo')],
+      [[{ message: 'foo' }], cmds.logInfo('foo')],
       [null, null]
     ]
   }))
