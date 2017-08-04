@@ -1,6 +1,6 @@
 {
   "name": "effects-as-data-universal",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Universal commands for effects-as-data",
   "main": "src/index.js",
   "repository": {
