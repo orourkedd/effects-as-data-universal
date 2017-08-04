@@ -1,10 +1,10 @@
-function setImmediate(cmd) {
+function setImmediateCmd(cmd) {
   return {
-    type: 'setImmediate',
+    type: "setImmediate",
     cmd
   }
 }
 
 module.exports = {
-  setImmediate
+  setImmediate: setImmediateCmd
 }
