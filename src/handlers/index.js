@@ -1,4 +1,4 @@
-const { setImmediate: setImmediateHandlers } = require("./set-immediate")
+const { setImmediate: setImmediateHandler } = require("./set-immediate")
 const { call } = require("./call")
 const { echo } = require("./echo")
 const { either } = require("./either")
@@ -13,7 +13,7 @@ const { retry } = require("./retry")
 const { hit } = require("./hit")
 
 module.exports = {
-  setImmediate: setImmediateHandlers,
+  setImmediate: setImmediateHandler,
   call,
   echo,
   either,
