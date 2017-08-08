@@ -1,13 +1,13 @@
-const fetch = require('fetch-everywhere')
+const fetch = require("fetch-everywhere")
 
 const defaultHeaders = {
-  'Content-Type': 'application/json;charset=UTF-8'
+  "Content-Type": "application/json;charset=UTF-8"
 }
 
 function httpGetFn(get, { url, headers, options }) {
   const defaultOptions = {
-    method: 'GET',
-    credentials: 'include'
+    method: "GET",
+    credentials: "include"
   }
   const allOptions = Object.assign({}, defaultOptions, options, { headers })
   return get(url, allOptions).then(checkStatus).then(parse(allOptions.meta))
@@ -15,8 +15,8 @@ function httpGetFn(get, { url, headers, options }) {
 
 function httpDeleteFn(remove, { url, headers, options }) {
   const defaultOptions = {
-    method: 'DELETE',
-    credentials: 'include'
+    method: "DELETE",
+    credentials: "include"
   }
   const allOptions = Object.assign({}, defaultOptions, options, { headers })
   return remove(url, allOptions).then(checkStatus).then(parse(allOptions.meta))
@@ -24,8 +24,8 @@ function httpDeleteFn(remove, { url, headers, options }) {
 
 function httpPostFn(post, { url, payload, headers, options }) {
   const defaultOptions = {
-    method: 'POST',
-    credentials: 'include',
+    method: "POST",
+    credentials: "include",
     body: JSON.stringify(payload),
     headers: defaultHeaders
   }
@@ -38,8 +38,8 @@ function httpPostFn(post, { url, payload, headers, options }) {
 
 function httpPutFn(put, { url, payload, headers, options }) {
   const defaultOptions = {
-    method: 'PUT',
-    credentials: 'include',
+    method: "PUT",
+    credentials: "include",
     body: JSON.stringify(payload),
     headers: defaultHeaders
   }
@@ -87,9 +87,9 @@ const parse = includeMeta => r => {
 }
 
 function parseHeaders(httpResponse) {
-  let headersRaw = httpResponse.headers._headers
+  let headersRaw = httpResponse.headers._headers || {}
   return Object.keys(headersRaw).reduce((p, c) => {
-    p[c] = headersRaw[c].join('')
+    p[c] = headersRaw[c].join("")
     return p
   }, {})
 }
