@@ -4,7 +4,7 @@ const { echo } = require("./echo")
 const { either } = require("./either")
 const { getState, setState } = require("./state")
 const { guid } = require("./guid")
-const { httpGet, httpPost, httpPut, httpDelete, rpc } = require("./http")
+const { httpGet, httpPost, httpPut, httpDelete } = require("./http")
 const { jsonParse } = require("./json-parse")
 const { logInfo, logError } = require("./log")
 const { now } = require("./now")
@@ -28,7 +28,6 @@ module.exports = {
   logInfo,
   now,
   randomNumber,
-  rpc,
   setState,
   retry,
   hit
