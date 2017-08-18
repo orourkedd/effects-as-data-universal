@@ -1,6 +1,8 @@
+const { get, set } = require('object-path')
+
 function getGlobal() {
   let g
-  if (typeof window !== "undefined") {
+  if (typeof window !== 'undefined') {
     g = window
   } else {
     g = global
@@ -19,16 +21,12 @@ function setGlobalState(payload) {
   g.effectsAsDataState = Object.assign({}, g.effectsAsDataState, payload)
 }
 
-function getState({ keys }) {
-  const state = getGlobalState()
-  return keys.reduce((p, c) => {
-    p[c] = state[c]
-    return p
-  }, {})
+function getState({ path }) {
+  return get(getGlobalState(), path)
 }
 
-function setState({ payload }) {
-  setGlobalState(payload)
+function setState({ path, payload }) {
+  return set(getGlobalState(), path, payload)
 }
 
 module.exports = {

@@ -6,10 +6,10 @@ describe('state.js', () => {
     it('should return a getState cmd with a key field', () => {
       const expected = {
         type: 'getState',
-        keys: ['foo'],
+        path: 'foo'
       }
 
-      const actual = getState(['foo'])
+      const actual = getState('foo')
 
       deepEqual(actual, expected)
     })
@@ -20,9 +20,10 @@ describe('state.js', () => {
       const expected = {
         type: 'setState',
         payload: { foo: 'bar' },
+        path: 'baz'
       }
 
-      const actual = setState({ foo: 'bar' })
+      const actual = setState('baz', { foo: 'bar' })
 
       deepEqual(actual, expected)
     })

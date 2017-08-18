@@ -1,18 +1,19 @@
-function getState(keys) {
+function getState(path) {
   return {
     type: 'getState',
-    keys,
+    path
   }
 }
 
-function setState(payload) {
+function setState(path, payload) {
   return {
     type: 'setState',
-    payload,
+    path,
+    payload
   }
 }
 
 module.exports = {
   getState,
-  setState,
+  setState
 }
