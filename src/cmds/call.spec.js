@@ -12,5 +12,9 @@ describe('call.js', () => {
         fn
       })
     })
+
+    it('should throw if fn is not a function', () => {
+      expect(() => call()).toThrow('The first argument must be a function')
+    })
   })
 })
