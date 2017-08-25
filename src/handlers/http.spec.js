@@ -71,16 +71,17 @@ describe('handlers', () => {
 
       return httpGetFn(get, cmd).catch(e => {
         const payload = {
-          meta: {
-            status: 500,
-            statusText: 'Internal Server Error',
-            headers: {}
-          },
-          payload: { foo: 'bar' }
+          foo: 'bar'
         }
 
+        const meta = {
+          status: 500,
+          statusText: 'Internal Server Error',
+          headers: {}
+        }
         equal(e instanceof Error, true)
         deepEqual(e.payload, payload)
+        deepEqual(e.meta, meta)
       })
     })
   })
@@ -151,16 +152,17 @@ describe('handlers', () => {
 
       return httpDeleteFn(remove, cmd).catch(e => {
         const payload = {
-          meta: {
-            status: 500,
-            statusText: 'Internal Server Error',
-            headers: {}
-          },
-          payload: { foo: 'bar' }
+          foo: 'bar'
+        }
+        const meta = {
+          status: 500,
+          statusText: 'Internal Server Error',
+          headers: {}
         }
 
         equal(e instanceof Error, true)
         deepEqual(e.payload, payload)
+        deepEqual(e.meta, meta)
       })
     })
   })
@@ -244,16 +246,18 @@ describe('handlers', () => {
 
       return httpPostFn(post, cmd).catch(e => {
         const payload = {
-          meta: {
-            status: 500,
-            statusText: 'Internal Server Error',
-            headers: {}
-          },
-          payload: { foo: 'bar' }
+          foo: 'bar'
+        }
+
+        const meta = {
+          status: 500,
+          statusText: 'Internal Server Error',
+          headers: {}
         }
 
         equal(e instanceof Error, true)
         deepEqual(e.payload, payload)
+        deepEqual(e.meta, meta)
       })
     })
   })
@@ -335,16 +339,18 @@ describe('handlers', () => {
 
       return httpPutFn(put, cmd).catch(e => {
         const payload = {
-          meta: {
-            status: 500,
-            statusText: 'Internal Server Error',
-            headers: {}
-          },
-          payload: { foo: 'bar' }
+          foo: 'bar'
+        }
+
+        const meta = {
+          status: 500,
+          statusText: 'Internal Server Error',
+          headers: {}
         }
 
         equal(e instanceof Error, true)
         deepEqual(e.payload, payload)
+        deepEqual(e.meta, meta)
       })
     })
   })
