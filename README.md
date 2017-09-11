@@ -1,5 +1,10 @@
 # Commands for effects-as-data that can run in node or in the browser
 
+## Usage in Node and the Browser (ES6 and ES5)
+
+When using in Node: `require('effects-as-data')`  
+When using in the browser (or in an old version of node): `require('effects-as-data/es5')`
+
 ### Table of Contents
 
 -   [call](#call)
