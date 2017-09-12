@@ -24,8 +24,8 @@ When using in the browser (or in an old version of node): `require('effects-as-d
 -   [randomNumber](#randomnumber)
 -   [retry](#retry)
 -   [getState](#getstate)
--   [setImmediate](#setImmediate)
 -   [setState](#setstate)
+-   [setImmediate](#setImmediate)
 
 ## call
 
