@@ -4,6 +4,7 @@ const cmds = require('../cmds')
 test('retry', () => {
   const durations = [10, 20, 30]
   let count = 0
+  // a mock call
   const call = (config, handlers, fn) => {
     const g = fn()
     g.next()
