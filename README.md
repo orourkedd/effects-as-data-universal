@@ -1,6 +1,6 @@
 # Universal Commands and Handlers
 
-Commands and handlers that can be used anywhere Javascript runs.
+Commands and handlers that can be used anywhere Javascript runs.  This module is meant to be used with [effects-as-data](https://github.com/orourkedd/effects-as-data).
 
 ## Usage in Node and the Browser (ES6 and ES5)
 
