@@ -25,7 +25,7 @@ When using in the browser (or in an old version of node): `require('effects-as-d
 -   [retry](#retry)
 -   [getState](#getstate)
 -   [setState](#setstate)
--   [setImmediate](#setImmediate)
+-   [setImmediate](#setimmediate)
 
 ## call
 
