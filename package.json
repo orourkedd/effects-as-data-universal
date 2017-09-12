@@ -1,6 +1,6 @@
 {
   "name": "effects-as-data-universal",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Universal commands for effects-as-data",
   "main": "src/index.js",
   "repository": {
@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "jest",
-    "test-mocha": "mocha src/**/*.spec.js --recursive --compilers js:babel-register --require babel-polyfill",
+    "test-mocha":
+      "mocha src/**/*.spec.js --recursive --compilers js:babel-register --require babel-polyfill",
     "transpile": "babel src --out-dir es5 --source-maps",
     "deploy": "npm run transpile && npm test && npm publish && rm -rf es5"
   },

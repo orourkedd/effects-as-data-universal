@@ -19,7 +19,7 @@ function retry(
       yield cmd
     } catch (e) {
       if (index >= durations.length) {
-        if (typeof defaultValue === undefined) throw e
+        if (defaultValue === undefined) throw e
         else return defaultValue
       }
       return delay(() => {
