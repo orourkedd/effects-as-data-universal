@@ -1,11 +1,11 @@
 function call(fn, ...args) {
   return {
-    type: 'call',
+    type: "call",
     fn,
     args
-  }
+  };
 }
 
 module.exports = {
   call
-}
+};

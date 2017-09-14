@@ -1,8 +1,8 @@
 function nowFn(n) {
-  return n()
+  return n();
 }
 
 module.exports = {
   nowFn,
-  now: cmd => nowFn(Date.now, cmd),
-}
+  now: cmd => nowFn(Date.now, cmd)
+};

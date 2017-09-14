@@ -1,6 +1,6 @@
 const defaultHeaders = {
   "Content-Type": "application/json;charset=UTF-8"
-}
+};
 
 function httpGet(url, headers = {}, options = {}) {
   return {
@@ -8,7 +8,7 @@ function httpGet(url, headers = {}, options = {}) {
     url,
     headers,
     options
-  }
+  };
 }
 
 function httpPost(url, payload, headers = {}, options = {}) {
@@ -18,7 +18,7 @@ function httpPost(url, payload, headers = {}, options = {}) {
     payload,
     headers: Object.assign({}, defaultHeaders, headers),
     options
-  }
+  };
 }
 
 function httpPut(url, payload, headers = {}, options = {}) {
@@ -28,7 +28,7 @@ function httpPut(url, payload, headers = {}, options = {}) {
     payload,
     headers: Object.assign({}, defaultHeaders, headers),
     options
-  }
+  };
 }
 
 function httpDelete(url, headers = {}, options = {}) {
@@ -37,7 +37,7 @@ function httpDelete(url, headers = {}, options = {}) {
     url,
     headers,
     options
-  }
+  };
 }
 
 module.exports = {
@@ -45,4 +45,4 @@ module.exports = {
   httpPut,
   httpGet,
   httpDelete
-}
+};

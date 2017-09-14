@@ -1,9 +1,9 @@
 function randomNumber() {
   return {
-    type: 'randomNumber',
-  }
+    type: "randomNumber"
+  };
 }
 
 module.exports = {
-  randomNumber,
-}
+  randomNumber
+};

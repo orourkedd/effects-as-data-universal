@@ -1,7 +1,7 @@
 function echo({ payload }) {
-  return payload
+  return payload;
 }
 
 module.exports = {
-  echo,
-}
+  echo
+};

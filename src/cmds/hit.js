@@ -1,15 +1,15 @@
 function hit(...cmds) {
   // Validation
-  if (cmds.length === 0) throw new Error('At least one cmd is required.')
+  if (cmds.length === 0) throw new Error("At least one cmd is required.");
   cmds.forEach(cmd => {
-    if (!cmd.type) throw new Error('All cmds must have a type.')
-  })
+    if (!cmd.type) throw new Error("All cmds must have a type.");
+  });
   return {
-    type: 'hit',
+    type: "hit",
     cmds
-  }
+  };
 }
 
 module.exports = {
   hit
-}
+};

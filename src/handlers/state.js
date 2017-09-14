@@ -1,36 +1,36 @@
-const { get, set } = require('object-path')
+const { get, set } = require("object-path");
 
 function getGlobal() {
-  let g
-  if (typeof window !== 'undefined') {
-    g = window
+  let g;
+  if (typeof window !== "undefined") {
+    g = window;
   } else {
-    g = global
+    g = global;
   }
-  return g
+  return g;
 }
 
 function getGlobalState() {
-  const g = getGlobal()
-  g.effectsAsDataState = g.effectsAsDataState || {}
-  return g.effectsAsDataState
+  const g = getGlobal();
+  g.effectsAsDataState = g.effectsAsDataState || {};
+  return g.effectsAsDataState;
 }
 
 function setGlobalState(payload) {
-  const g = getGlobal()
-  g.effectsAsDataState = Object.assign({}, g.effectsAsDataState, payload)
+  const g = getGlobal();
+  g.effectsAsDataState = Object.assign({}, g.effectsAsDataState, payload);
 }
 
 function getState({ path }) {
-  return get(getGlobalState(), path)
+  return get(getGlobalState(), path);
 }
 
 function setState({ path, payload }) {
-  return set(getGlobalState(), path, payload)
+  return set(getGlobalState(), path, payload);
 }
 
 module.exports = {
   getState,
   setState,
   getGlobalState
-}
+};

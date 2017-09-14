@@ -1,9 +1,9 @@
 function guid() {
   return {
-    type: 'guid',
-  }
+    type: "guid"
+  };
 }
 
 module.exports = {
-  guid,
-}
+  guid
+};

@@ -1,10 +1,10 @@
 function jsonParse(payload) {
   return {
-    type: 'jsonParse',
-    payload,
-  }
+    type: "jsonParse",
+    payload
+  };
 }
 
 module.exports = {
-  jsonParse,
-}
+  jsonParse
+};

@@ -1,10 +1,10 @@
 function echo(payload) {
   return {
-    type: 'echo',
-    payload,
-  }
+    type: "echo",
+    payload
+  };
 }
 
 module.exports = {
-  echo,
-}
+  echo
+};

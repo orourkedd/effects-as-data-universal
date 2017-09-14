@@ -1,17 +1,17 @@
-const { call } = require('./call')
-const { echo } = require('./echo')
-const { either } = require('./either')
-const { getState, setState } = require('./state')
-const { guid } = require('./guid')
-const { hit } = require('./hit')
-const { httpGet, httpPost, httpPut, httpDelete } = require('./http')
-const { jsonParse } = require('./json-parse')
-const { logInfo, logError } = require('./log')
-const { now } = require('./now')
-const { randomNumber } = require('./random-number')
-const { retry } = require('./retry')
-const { setImmediate: setImmediateCmd } = require('./set-immediate')
-const invoke = require('./invoke')
+const { call } = require("./call");
+const { echo } = require("./echo");
+const { either } = require("./either");
+const { getState, setState } = require("./state");
+const { guid } = require("./guid");
+const { hit } = require("./hit");
+const { httpGet, httpPost, httpPut, httpDelete } = require("./http");
+const { jsonParse } = require("./json-parse");
+const { logInfo, logError } = require("./log");
+const { now } = require("./now");
+const { randomNumber } = require("./random-number");
+const { retry } = require("./retry");
+const { setImmediate: setImmediateCmd } = require("./set-immediate");
+const invoke = require("./invoke");
 
 module.exports = Object.assign(
   {
@@ -35,4 +35,4 @@ module.exports = Object.assign(
     setState
   },
   invoke
-)
+);

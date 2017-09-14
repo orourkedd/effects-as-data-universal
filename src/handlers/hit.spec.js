@@ -1,113 +1,113 @@
-const { hit } = require('./hit')
-const cmds = require('../cmds')
-const { call } = require('effects-as-data')
+const { hit } = require("./hit");
+const cmds = require("../cmds");
+const { call } = require("effects-as-data");
 
-test('hit()', () => {
+test("hit()", () => {
   const handlers = {
-    one: () => 'foo'
-  }
+    one: () => "foo"
+  };
   const testCmds = {
-    one: { type: 'one' }
-  }
-  const cmd = cmds.hit(testCmds.one)
+    one: { type: "one" }
+  };
+  const cmd = cmds.hit(testCmds.one);
   return hit(cmd, { handlers, config: {}, call }).then(result => {
-    expect(result).toEqual('foo')
-  })
-})
+    expect(result).toEqual("foo");
+  });
+});
 
-test('hit() should go to next on error', () => {
+test("hit() should go to next on error", () => {
   const handlers = {
     one: () => {
-      throw new Error('oops')
+      throw new Error("oops");
     },
-    two: () => 'foo'
-  }
+    two: () => "foo"
+  };
   const testCmds = {
-    one: { type: 'one' },
-    two: { type: 'two' }
-  }
-  const cmd = cmds.hit(testCmds.one, testCmds.two)
+    one: { type: "one" },
+    two: { type: "two" }
+  };
+  const cmd = cmds.hit(testCmds.one, testCmds.two);
   return hit(cmd, { handlers, config: {}, call }).then(result => {
-    expect(result).toEqual('foo')
-  })
-})
+    expect(result).toEqual("foo");
+  });
+});
 
-test('hit() should go to next on falsey value 1', () => {
+test("hit() should go to next on falsey value 1", () => {
   const handlers = {
     one: () => null,
-    two: () => 'foo'
-  }
+    two: () => "foo"
+  };
   const testCmds = {
-    one: { type: 'one' },
-    two: { type: 'two' }
-  }
-  const cmd = cmds.hit(testCmds.one, testCmds.two)
+    one: { type: "one" },
+    two: { type: "two" }
+  };
+  const cmd = cmds.hit(testCmds.one, testCmds.two);
   return hit(cmd, { handlers, config: {}, call }).then(result => {
-    expect(result).toEqual('foo')
-  })
-})
+    expect(result).toEqual("foo");
+  });
+});
 
-test('hit() should go to next on falsey value 2', () => {
+test("hit() should go to next on falsey value 2", () => {
   const handlers = {
     one: () => null,
     two: () => null,
-    three: () => 'foo'
-  }
+    three: () => "foo"
+  };
   const testCmds = {
-    one: { type: 'one' },
-    two: { type: 'two' },
-    three: { type: 'three' }
-  }
-  const cmd = cmds.hit(testCmds.one, testCmds.two, testCmds.three)
+    one: { type: "one" },
+    two: { type: "two" },
+    three: { type: "three" }
+  };
+  const cmd = cmds.hit(testCmds.one, testCmds.two, testCmds.three);
   return hit(cmd, { handlers, config: {}, call }).then(result => {
-    expect(result).toEqual('foo')
-  })
-})
+    expect(result).toEqual("foo");
+  });
+});
 
-test('hit() should throw error if no hits', async () => {
+test("hit() should throw error if no hits", async () => {
   const handlers = {
     one: () => null,
     two: () => null,
     three: () => null
-  }
+  };
   const testCmds = {
-    one: { type: 'one' },
-    two: { type: 'two' },
-    three: { type: 'three' }
-  }
-  const cmd = cmds.hit(testCmds.one, testCmds.two, testCmds.three)
+    one: { type: "one" },
+    two: { type: "two" },
+    three: { type: "three" }
+  };
+  const cmd = cmds.hit(testCmds.one, testCmds.two, testCmds.three);
   try {
-    await hit(cmd, { handlers, config: {}, call })
+    await hit(cmd, { handlers, config: {}, call });
   } catch (e) {
     expect(e.message).toEqual(
-      'hit could not return a value because every cmd failed or returned a falsey value.'
-    )
-    return
+      "hit could not return a value because every cmd failed or returned a falsey value."
+    );
+    return;
   }
-  fail('hit did not throw')
-})
+  fail("hit did not throw");
+});
 
-test('hit() should throw error if no hits and error', async () => {
+test("hit() should throw error if no hits and error", async () => {
   const handlers = {
     one: () => null,
     two: () => null,
     three: () => {
-      throw new Error('oops')
+      throw new Error("oops");
     }
-  }
+  };
   const testCmds = {
-    one: { type: 'one' },
-    two: { type: 'two' },
-    three: { type: 'three' }
-  }
-  const cmd = cmds.hit(testCmds.one, testCmds.two, testCmds.three)
+    one: { type: "one" },
+    two: { type: "two" },
+    three: { type: "three" }
+  };
+  const cmd = cmds.hit(testCmds.one, testCmds.two, testCmds.three);
   try {
-    await hit(cmd, { handlers, config: {}, call })
+    await hit(cmd, { handlers, config: {}, call });
   } catch (e) {
     expect(e.message).toEqual(
-      'hit could not return a value because every cmd failed or returned a falsey value.'
-    )
-    return
+      "hit could not return a value because every cmd failed or returned a falsey value."
+    );
+    return;
   }
-  fail('hit did not throw')
-})
+  fail("hit did not throw");
+});

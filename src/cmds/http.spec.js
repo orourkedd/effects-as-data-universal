@@ -1,166 +1,166 @@
-const { httpGet, httpDelete, httpPost, httpPut } = require('./http')
-const { deepEqual } = require('assert')
+const { httpGet, httpDelete, httpPost, httpPut } = require("./http");
+const { deepEqual } = require("assert");
 
 const defaultHeaders = {
-  'Content-Type': 'application/json;charset=UTF-8'
-}
+  "Content-Type": "application/json;charset=UTF-8"
+};
 
-describe('cmds', () => {
-  describe('httpGet', () => {
-    it('should return an httpGet object', () => {
-      const actual = httpGet('http://www.example.com')
+describe("cmds", () => {
+  describe("httpGet", () => {
+    it("should return an httpGet object", () => {
+      const actual = httpGet("http://www.example.com");
       const expected = {
-        type: 'httpGet',
-        url: 'http://www.example.com',
+        type: "httpGet",
+        url: "http://www.example.com",
         headers: {},
         options: {}
-      }
-      deepEqual(actual, expected)
-    })
+      };
+      deepEqual(actual, expected);
+    });
 
-    it('should return an httpGet', () => {
+    it("should return an httpGet", () => {
       const actual = httpGet(
-        'http://www.example.com',
+        "http://www.example.com",
         {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         {
-          credentials: 'include'
+          credentials: "include"
         }
-      )
+      );
 
       const expected = {
-        type: 'httpGet',
-        url: 'http://www.example.com',
+        type: "httpGet",
+        url: "http://www.example.com",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         options: {
-          credentials: 'include'
+          credentials: "include"
         }
-      }
+      };
 
-      deepEqual(actual, expected)
-    })
-  })
+      deepEqual(actual, expected);
+    });
+  });
 
-  describe('httpDelete', () => {
-    it('should return an httpDelete object', () => {
-      const actual = httpDelete('http://www.example.com')
+  describe("httpDelete", () => {
+    it("should return an httpDelete object", () => {
+      const actual = httpDelete("http://www.example.com");
       const expected = {
-        type: 'httpDelete',
-        url: 'http://www.example.com',
+        type: "httpDelete",
+        url: "http://www.example.com",
         headers: {},
         options: {}
-      }
-      deepEqual(actual, expected)
-    })
+      };
+      deepEqual(actual, expected);
+    });
 
-    it('should return an httpDelete', () => {
+    it("should return an httpDelete", () => {
       const actual = httpDelete(
-        'http://www.example.com',
+        "http://www.example.com",
         {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         {
-          credentials: 'include'
+          credentials: "include"
         }
-      )
+      );
 
       const expected = {
-        type: 'httpDelete',
-        url: 'http://www.example.com',
+        type: "httpDelete",
+        url: "http://www.example.com",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
         options: {
-          credentials: 'include'
+          credentials: "include"
         }
-      }
+      };
 
-      deepEqual(actual, expected)
-    })
-  })
+      deepEqual(actual, expected);
+    });
+  });
 
-  describe('httpPost', () => {
-    it('should return an httpPost object', () => {
-      const actual = httpPost('http://www.example.com', { foo: 'bar' })
+  describe("httpPost", () => {
+    it("should return an httpPost object", () => {
+      const actual = httpPost("http://www.example.com", { foo: "bar" });
       const expected = {
-        type: 'httpPost',
-        url: 'http://www.example.com',
-        payload: { foo: 'bar' },
+        type: "httpPost",
+        url: "http://www.example.com",
+        payload: { foo: "bar" },
         headers: defaultHeaders,
         options: {}
-      }
-      deepEqual(actual, expected)
-    })
+      };
+      deepEqual(actual, expected);
+    });
 
-    it('should return an httpPost', () => {
+    it("should return an httpPost", () => {
       const actual = httpPost(
-        'http://www.example.com',
-        { foo: 'bar' },
+        "http://www.example.com",
+        { foo: "bar" },
         {
-          'Content-Type': 'text/html'
+          "Content-Type": "text/html"
         },
         {
-          credentials: 'include'
+          credentials: "include"
         }
-      )
+      );
 
       const expected = {
-        type: 'httpPost',
-        url: 'http://www.example.com',
-        payload: { foo: 'bar' },
+        type: "httpPost",
+        url: "http://www.example.com",
+        payload: { foo: "bar" },
         headers: {
-          'Content-Type': 'text/html'
+          "Content-Type": "text/html"
         },
         options: {
-          credentials: 'include'
+          credentials: "include"
         }
-      }
+      };
 
-      deepEqual(actual, expected)
-    })
-  })
+      deepEqual(actual, expected);
+    });
+  });
 
-  describe('httpPut', () => {
-    it('should return an httpPut object', () => {
-      const actual = httpPut('http://www.example.com', { foo: 'bar' })
+  describe("httpPut", () => {
+    it("should return an httpPut object", () => {
+      const actual = httpPut("http://www.example.com", { foo: "bar" });
       const expected = {
-        type: 'httpPut',
-        url: 'http://www.example.com',
-        payload: { foo: 'bar' },
+        type: "httpPut",
+        url: "http://www.example.com",
+        payload: { foo: "bar" },
         headers: defaultHeaders,
         options: {}
-      }
-      deepEqual(actual, expected)
-    })
+      };
+      deepEqual(actual, expected);
+    });
 
-    it('should return an httpPut', () => {
+    it("should return an httpPut", () => {
       const actual = httpPut(
-        'http://www.example.com',
-        { foo: 'bar' },
+        "http://www.example.com",
+        { foo: "bar" },
         {
-          'Content-Type': 'text/html'
+          "Content-Type": "text/html"
         },
         {
-          credentials: 'include'
+          credentials: "include"
         }
-      )
+      );
 
       const expected = {
-        type: 'httpPut',
-        url: 'http://www.example.com',
-        payload: { foo: 'bar' },
+        type: "httpPut",
+        url: "http://www.example.com",
+        payload: { foo: "bar" },
         headers: {
-          'Content-Type': 'text/html'
+          "Content-Type": "text/html"
         },
         options: {
-          credentials: 'include'
+          credentials: "include"
         }
-      }
+      };
 
-      deepEqual(actual, expected)
-    })
-  })
-})
+      deepEqual(actual, expected);
+    });
+  });
+});

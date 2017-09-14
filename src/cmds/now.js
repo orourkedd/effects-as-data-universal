@@ -1,9 +1,9 @@
 function now() {
   return {
-    type: 'now',
-  }
+    type: "now"
+  };
 }
 
 module.exports = {
-  now,
-}
+  now
+};
