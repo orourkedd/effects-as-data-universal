@@ -11,6 +11,7 @@ const { now } = require("./now");
 const { invoke } = require("./invoke");
 const { randomNumber } = require("./random-number");
 const { retry } = require("./retry");
+const { poll, clearPoll } = require("./poll");
 const { setImmediate: setImmediateHandler } = require("./set-immediate");
 
 module.exports = {
@@ -31,6 +32,8 @@ module.exports = {
   invoke,
   randomNumber,
   retry,
+  poll,
+  clearPoll,
   setImmediate: setImmediateHandler,
   setState
 };

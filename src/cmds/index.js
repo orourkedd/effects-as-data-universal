@@ -10,6 +10,7 @@ const { logInfo, logError } = require("./log");
 const { now } = require("./now");
 const { randomNumber } = require("./random-number");
 const { retry } = require("./retry");
+const { poll, clearPoll } = require("./poll");
 const { setImmediate: setImmediateCmd } = require("./set-immediate");
 const invoke = require("./invoke");
 
@@ -31,6 +32,8 @@ module.exports = Object.assign(
     now,
     randomNumber,
     retry,
+    poll,
+    clearPoll,
     setImmediate: setImmediateCmd,
     setState
   },
