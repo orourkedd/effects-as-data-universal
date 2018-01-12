@@ -12,8 +12,11 @@ const { randomNumber } = require("./random-number");
 const { retry } = require("./retry");
 const { poll, clearPoll } = require("./poll");
 const { sleep } = require("./sleep");
-const { setImmediate: setImmediateCmd } = require("./set-immediate");
+const immediate = require("./set-immediate");
 const invoke = require("./invoke");
+const interval = require("./interval");
+const globalvars = require("./globalvars");
+const series = require("./series");
 
 module.exports = Object.assign(
   {
@@ -36,8 +39,11 @@ module.exports = Object.assign(
     poll,
     sleep,
     clearPoll,
-    setImmediate: setImmediateCmd,
     setState
   },
-  invoke
+  immediate,
+  invoke,
+  interval,
+  globalvars,
+  series
 );

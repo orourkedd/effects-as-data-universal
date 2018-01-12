@@ -13,29 +13,37 @@ const { randomNumber } = require("./random-number");
 const { retry } = require("./retry");
 const { poll, clearPoll } = require("./poll");
 const { sleep } = require("./sleep");
-const { setImmediate: setImmediateHandler } = require("./set-immediate");
+const immediate = require("./set-immediate");
+const interval = require("./interval");
+const globalvars = require("./globalvars");
+const series = require("./series");
 
-module.exports = {
-  call,
-  echo,
-  either,
-  getState,
-  guid,
-  hit,
-  httpDelete,
-  httpGet,
-  httpPost,
-  httpPut,
-  jsonParse,
-  logError,
-  logInfo,
-  now,
-  invoke,
-  randomNumber,
-  retry,
-  poll,
-  sleep,
-  clearPoll,
-  setImmediate: setImmediateHandler,
-  setState
-};
+module.exports = Object.assign(
+  {
+    call,
+    echo,
+    either,
+    getState,
+    guid,
+    hit,
+    httpDelete,
+    httpGet,
+    httpPost,
+    httpPut,
+    jsonParse,
+    logError,
+    logInfo,
+    now,
+    invoke,
+    randomNumber,
+    retry,
+    poll,
+    sleep,
+    clearPoll,
+    setState
+  },
+  immediate,
+  interval,
+  globalvars,
+  series
+);
