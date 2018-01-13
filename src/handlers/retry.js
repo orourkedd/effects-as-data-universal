@@ -16,7 +16,7 @@ function retry(
 ) {
   return call(config, handlers, function*() {
     try {
-      yield cmd;
+      return yield cmd;
     } catch (e) {
       if (index >= durations.length) {
         if (defaultValue === undefined) throw e;
