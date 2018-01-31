@@ -13,6 +13,7 @@ When using in the browser (or in an old version of node): `require('effects-as-d
 -   [echo](#echo)
 -   [either](#either)
 -   [guid](#guid)
+-   [hit](#hit)
 -   [httpGet](#httpget)
 -   [httpPost](#httppost)
 -   [httpPut](#httpput)
@@ -231,6 +232,54 @@ call({}, handlers, example).then(result => {
 ```
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** an cmd of type `guid`.
+
+## hit
+
+Creates a `hit` cmd.  `yield` a `hit` cmd to attempt each command until a non-falsy value is returned.
+
+**Parameters**
+
+-   `...cmds` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** Commands to try in order. Pass each command as an argument.
+
+**Examples**
+
+```javascript
+//  Test It
+const { testFn } = require('effects-as-data/test')
+const { cmds } = require('effects-as-data-universal')
+const testExample = testFn(example)
+
+describe('example()', () => {
+  it('should attempt each command until a truthy value is returned or the end is reached', testExample(() => {
+    return [
+      [[null], cmds.hit(cmds.echo(false), cmds.echo(0), cmds.echo(5))],
+      [5, 5]
+    ]
+  }))
+})
+```
+
+```javascript
+//  Write It
+const { cmds } = require('effects-as-data-universal')
+
+function * example ({ url }) {
+  const result = yield cmds.hit(cmds.echo(false), cmds.echo(0), cmds.echo(5))
+  return result
+}
+```
+
+```javascript
+//  Run It
+const { handlers } = require('effects-as-data-universal')
+const { call } = require('effects-as-data')
+
+call({}, handlers, example).then((result) => {
+  result // First truthy value of commands
+})
+```
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** a cmd of type `hit`.
 
 ## httpGet
 
