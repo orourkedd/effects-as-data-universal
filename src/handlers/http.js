@@ -7,7 +7,7 @@ const defaultHeaders = {
 function httpGetFn(get, { url, headers, options }) {
   const defaultOptions = {
     method: "GET",
-    credentials: "include"
+    credentials: "same-origin"
   };
   const allOptions = Object.assign({}, defaultOptions, options, { headers });
   return get(url, allOptions)
@@ -18,7 +18,7 @@ function httpGetFn(get, { url, headers, options }) {
 function httpDeleteFn(remove, { url, headers, options }) {
   const defaultOptions = {
     method: "DELETE",
-    credentials: "include"
+    credentials: "same-origin"
   };
   const allOptions = Object.assign({}, defaultOptions, options, { headers });
   return remove(url, allOptions)
@@ -29,7 +29,7 @@ function httpDeleteFn(remove, { url, headers, options }) {
 function httpPostFn(post, { url, payload, headers, options }) {
   const defaultOptions = {
     method: "POST",
-    credentials: "include",
+    credentials: "same-origin",
     body: JSON.stringify(payload),
     headers: defaultHeaders
   };
@@ -45,7 +45,7 @@ function httpPostFn(post, { url, payload, headers, options }) {
 function httpPutFn(put, { url, payload, headers, options }) {
   const defaultOptions = {
     method: "PUT",
-    credentials: "include",
+    credentials: "same-origin",
     body: JSON.stringify(payload),
     headers: defaultHeaders
   };
