@@ -1,11 +1,12 @@
 const { retry } = require("./retry");
+const { echo } = require("effects-as-data");
 const cmds = require("../cmds");
 
 test("retry", () => {
   const durations = [10, 20, 30];
   let count = 0;
   // a mock call
-  const call = (config, handlers, fn) => {
+  const call = (context, handlers, fn) => {
     const g = fn();
     g.next();
     count++;
@@ -18,7 +19,7 @@ test("retry", () => {
     }
     return Promise.resolve(v.value);
   };
-  const cmd = cmds.retry(cmds.echo("foo"), durations, "default");
+  const cmd = cmds.retry(echo("foo"), durations, "default");
   return retry(cmd, { call }).then(r => {
     expect(r).toEqual("default");
   });

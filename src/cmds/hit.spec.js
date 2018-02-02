@@ -1,13 +1,12 @@
 const { hit } = require("./hit");
-const { echo } = require("./echo");
 const { guid } = require("./guid");
 const { now } = require("./now");
 
 test("hit()", () => {
-  const actual = hit(guid(), now(), echo("foo"));
+  const actual = hit(guid(), now());
   const expected = {
     type: "hit",
-    cmds: [guid(), now(), echo("foo")]
+    cmds: [guid(), now()]
   };
   expect(actual).toEqual(expected);
 });

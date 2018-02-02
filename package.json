@@ -1,6 +1,6 @@
 {
   "name": "effects-as-data-universal",
-  "version": "4.6.0",
+  "version": "5.0.0",
   "description": "Universal commands for effects-as-data",
   "main": "src/index.js",
   "repository": {
@@ -9,21 +9,21 @@
   },
   "scripts": {
     "test": "jest",
-    "test-mocha":
-      "mocha src/**/*.spec.js --recursive --compilers js:babel-register --require babel-polyfill",
+    "test-mocha": "mocha src/**/*.spec.js --recursive --compilers js:babel-register --require babel-polyfill",
     "transpile": "babel src --out-dir es5 --source-maps",
-    "deploy": "npm run transpile && npm test && npm publish && rm -rf es5",
+    "deploy": "npm run transpile && npm test && npm publish --tag beta && rm -rf es5",
     "prettier": "prettier --write {src/*.js,src/**/*.js}"
   },
   "author": "orourkedd",
   "license": "MIT",
   "dependencies": {
+    "effects-as-data": "^3.0.0",
     "fetch-everywhere": "^1.0.5",
     "object-path": "^0.11.4",
     "uuid": "^3.1.0"
   },
   "peerDependencies": {
-    "effects-as-data": "^2.14.5"
+    "effects-as-data": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

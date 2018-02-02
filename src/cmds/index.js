@@ -1,5 +1,3 @@
-const { call } = require("./call");
-const { echo } = require("./echo");
 const { either } = require("./either");
 const { getState, setState } = require("./state");
 const { guid } = require("./guid");
@@ -13,15 +11,12 @@ const { retry } = require("./retry");
 const { poll, clearPoll } = require("./poll");
 const { sleep } = require("./sleep");
 const immediate = require("./set-immediate");
-const invoke = require("./invoke");
 const interval = require("./interval");
 const globalvars = require("./globalvars");
 const series = require("./series");
 
 module.exports = Object.assign(
   {
-    call,
-    echo,
     either,
     getState,
     guid,
@@ -42,7 +37,6 @@ module.exports = Object.assign(
     setState
   },
   immediate,
-  invoke,
   interval,
   globalvars,
   series

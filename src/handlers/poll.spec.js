@@ -1,6 +1,6 @@
 const handlers = require("./poll");
 const cmds = require("../cmds");
-const { call } = require("effects-as-data");
+const { call } = require("effects-as-data/core");
 const { set } = require("object-path-immutable");
 
 test("poll() should poll until tryCount is reached", () => {
@@ -9,7 +9,7 @@ test("poll() should poll until tryCount is reached", () => {
   }
   return handlers
     .poll(cmds.poll(foo, {}, 100, 3), {
-      config: {},
+      context: {},
       call,
       handlers: {}
     })
@@ -26,7 +26,7 @@ test("poll() should abort if done is true", () => {
   }
   return handlers
     .poll(cmds.poll(foo, {}, 1), {
-      config: {},
+      context: {},
       call,
       handlers: {}
     })
@@ -44,7 +44,7 @@ test("clearPoll() should clear interval", () => {
   }
   return handlers
     .poll(cmds.poll(foo, {}, 1, 100), {
-      config: {},
+      context: {},
       call,
       handlers
     })
@@ -60,7 +60,7 @@ test("poll() should handle error in function", () => {
   }
   return handlers
     .poll(cmds.poll(foo, {}, 1), {
-      config: {},
+      context: {},
       call,
       handlers: {}
     })

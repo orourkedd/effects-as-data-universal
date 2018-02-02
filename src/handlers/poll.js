@@ -3,7 +3,7 @@ const { guid } = require("./guid");
 
 function poll(
   { fn, ctx, interval = 1000, tryCount },
-  { call, config, handlers }
+  { call, context, handlers }
 ) {
   let count = 0;
   const id = guid();
@@ -13,18 +13,18 @@ function poll(
       if (ctx2.done === true) return resolve(ctx2);
       polls[id] = setTimeout(() => {
         try {
-          call(config, handlers, fn, ctx2, id)
-            .then(updatedContext => {
+          call(context, handlers, fn, ctx2, id)
+            .then(updatedCtx => {
               count++;
-              if (!updatedContext) {
+              if (!updatedCtx) {
                 return reject(
                   new Error(
                     "The context must be returned from a polling function."
                   )
                 );
               }
-              if (polls[id] === undefined) return resolve(updatedContext);
-              doPoll(updatedContext);
+              if (polls[id] === undefined) return resolve(updatedCtx);
+              doPoll(updatedCtx);
             })
             .catch(reject);
         } catch (e) {
