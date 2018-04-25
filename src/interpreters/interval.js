@@ -1,6 +1,6 @@
-function setIntervalHandler({ fn, time }, { call, context, handlers }) {
+function setIntervalHandler({ fn, time }, { call, context, interpreters }) {
   const id = setInterval(() => {
-    call(context, handlers, fn).catch(() => true);
+    call(context, interpreters, fn).catch(() => true);
   }, time);
   return id;
 }

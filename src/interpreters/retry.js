@@ -12,9 +12,9 @@ function delay(fn, time) {
 
 function retry(
   { cmd, durations, defaultValue },
-  { call, context, handlers, index = 0 }
+  { call, context, interpreters, index = 0 }
 ) {
-  return call(context, handlers, function*() {
+  return call(context, interpreters, function*() {
     try {
       return yield cmd;
     } catch (e) {
@@ -25,7 +25,7 @@ function retry(
       return delay(() => {
         return retry(
           { cmd, durations, defaultValue },
-          { call, context, handlers, index: index + 1 }
+          { call, context, interpreters, index: index + 1 }
         );
       }, durations[index]);
     }

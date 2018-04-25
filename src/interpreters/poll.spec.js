@@ -1,4 +1,4 @@
-const handlers = require("./poll");
+const interpreters = require("./poll");
 const cmds = require("../cmds");
 const { call } = require("effects-as-data/core");
 const { set } = require("object-path-immutable");
@@ -7,11 +7,11 @@ test("poll() should poll until tryCount is reached", () => {
   function* foo(ctx) {
     return set(ctx, "count", (ctx.count || 0) + 1);
   }
-  return handlers
+  return interpreters
     .poll(cmds.poll(foo, {}, 100, 3), {
       context: {},
       call,
-      handlers: {}
+      interpreters: {}
     })
     .then(ctx => {
       expect(ctx.count).toEqual(3);
@@ -24,11 +24,11 @@ test("poll() should abort if done is true", () => {
     count++;
     return set(ctx, "done", true);
   }
-  return handlers
+  return interpreters
     .poll(cmds.poll(foo, {}, 1), {
       context: {},
       call,
-      handlers: {}
+      interpreters: {}
     })
     .then(ctx => {
       expect(count).toEqual(1);
@@ -42,11 +42,11 @@ test("clearPoll() should clear interval", () => {
     if (count === 5) yield cmds.clearPoll(id);
     return ctx;
   }
-  return handlers
+  return interpreters
     .poll(cmds.poll(foo, {}, 1, 100), {
       context: {},
       call,
-      handlers
+      interpreters
     })
     .then(ctx => {
       expect(count).toEqual(5);
@@ -58,11 +58,11 @@ test("poll() should handle error in function", () => {
   function* foo(ctx) {
     throw new Error("oops");
   }
-  return handlers
+  return interpreters
     .poll(cmds.poll(foo, {}, 1), {
       context: {},
       call,
-      handlers: {}
+      interpreters: {}
     })
     .then(() => {
       fail("should have thrown");

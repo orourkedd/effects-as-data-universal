@@ -1,5 +1,5 @@
-function either({ cmd, defaultValue }, { call, context, handlers }) {
-  return call(context, handlers, function*() {
+function either({ cmd, defaultValue }, { call, context, interpreters }) {
+  return call(context, interpreters, function*() {
     try {
       const result = yield cmd;
       return result || defaultValue;

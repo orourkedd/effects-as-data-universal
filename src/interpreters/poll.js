@@ -3,7 +3,7 @@ const { guid } = require("./guid");
 
 function poll(
   { fn, ctx, interval = 1000, tryCount },
-  { call, context, handlers }
+  { call, context, interpreters }
 ) {
   let count = 0;
   const id = guid();
@@ -13,7 +13,7 @@ function poll(
       if (ctx2.done === true) return resolve(ctx2);
       polls[id] = setTimeout(() => {
         try {
-          call(context, handlers, fn, ctx2, id)
+          call(context, interpreters, fn, ctx2, id)
             .then(updatedCtx => {
               count++;
               if (!updatedCtx) {

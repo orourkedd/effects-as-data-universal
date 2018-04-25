@@ -6,7 +6,7 @@ test("retry", () => {
   const durations = [10, 20, 30];
   let count = 0;
   // a mock call
-  const call = (context, handlers, fn) => {
+  const call = (context, interpreters, fn) => {
     const g = fn();
     g.next();
     count++;

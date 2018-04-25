@@ -1,16 +1,16 @@
-function hit(cmd, { context, handlers, call }, index = 0) {
+function hit(cmd, { context, interpreters, call }, index = 0) {
   const fn = function*() {
     return yield cmd.cmds[index];
   };
-  return call(context, handlers, fn)
+  return call(context, interpreters, fn)
     .then(result => {
       if (result) return result;
       checkForEnd(index, cmd.cmds);
-      return hit(cmd, { context, handlers, call }, index + 1);
+      return hit(cmd, { context, interpreters, call }, index + 1);
     })
     .catch(() => {
       checkForEnd(index, cmd.cmds);
-      return hit(cmd, { context, handlers, call }, index + 1);
+      return hit(cmd, { context, interpreters, call }, index + 1);
     });
 }
 
